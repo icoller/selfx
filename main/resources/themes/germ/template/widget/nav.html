@@ -1,0 +1,31 @@
+{{ menu := Widget.Menu()}}
+{{ menuLen := len(menu) }}
+
+{{ if menuLen > 0}}
+    <nav x-ref="menu">
+        <div class="nav-item"><h2><a href="/">首页</a></h2></div>
+        {{ range i, v := menu }}
+            {{ current := false}}
+            {{if Page.Name==`category` && (Data.ID == v.ID || Data.ParentID == v.ID)}}{{current = true}}{{end}}
+            {{if Page.Name==`article` && Data.CategoryID == v.ID}}{{current = true}}{{end}}
+            <div class="nav-item{{if current}} current{{end}}" x-data="{ show: false }" @mouseleave="show = false" @mouseover="show = true">
+                {{ if len(v.Children) > 0}}
+                <h2><a href="{{v.URL()}}">{{v.Name}}
+                        <i x-show="show" style="transform: rotate(270deg);" class="ml-3 icon icon-right"></i>
+                        <i x-show="!show" style="transform: rotate(90deg);" class="ml-3 icon icon-right"></i>
+                    </template>
+                </a></h2>
+                <div class="nav-sub" x-show="showDrawer || show" x-cloak>
+                    <ul>
+                        {{ range i, s := v.Children }}
+                        <li><a href="{{s.URL()}}">{{s.Name}}</a></li>
+                        {{ end }}
+                    </ul>
+                </div>
+                {{ else }}
+                <h2><a href="{{v.URL()}}">{{v.Name}}</a></h2>
+                {{ end }}
+            </div>
+        {{ end }}
+    </nav>
+{{ end }}

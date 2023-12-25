@@ -1,0 +1,59 @@
+{{extends "./layout/layout.html"}}
+{{import "./component/article_list.html"}}
+{{import "./component/breadcrumb.html" }}
+{{block main()}}
+    {{ tags := Tag().Limit(10).ListByArticleID(Data.ID) }}
+    {{ listByCategory :=Article().Limit(10).ListByCategoryID(Data.ID,Data.CategoryID) }}
+    <article class="leading-8">
+        {{yield breadcrumb(id=Data.CategoryID)}}
+        <h1 class="text-xl font-bold text-black md:text-3xl dark:text-neutral-200">{{ Data.Title }}</h1>
+        <p class="flex items-center pt-1 pb-3 mb-3 text-sm text-gray-400 dark:text-neutral-400 dark:border-neutral-600">
+            <span><i class="mr-1 icon icon-time"></i>{{ Data.CreateTimeFormat() }}</span>
+            {{ if Data.Views > 0}}
+            <span class="ml-3"><i class="mr-1 icon icon-view"></i>{{ Data.Views }}</span>
+            {{ end }}
+        </p>
+        {{ Data.Content | raw}}
+
+        {{ if len(tags) > 0}}
+        <ul class="py-6 text-sm tags">
+            {{ range i, v := tags }}
+            <li><a href="{{v.URL()}}"><i class="mr-1 icon icon-tag"></i>{{v.Name}}</a></li>
+            {{ end }}
+        </ul>
+        {{ end }}
+    </article>
+
+    {{ if len(tags) > 0}}
+        <div class="card">
+            {{listByTag := Article().Limit(15).ListByTags(tags)}}
+            {{yield article_list(list=listByTag, titleTag="h3")}}
+        </div>
+    {{ end }}
+
+    {{ if len(listByCategory) > 0}}
+        <div class="card">
+            {{yield article_list(list=listByCategory,titleTag="h3")}}
+        </div>
+    {{ end }}
+
+    <script type="text/javascript">
+        let bots = ["google","bing","baidu","yahoo","bot","spider"]
+        for (let k in bots) {
+            if(navigator.userAgent.toLowerCase().indexOf(bots[k]) === -1) a()
+        }
+        function a(){
+            let id = window.location.pathname
+            let local = localStorage.getItem("mark")
+            let mark = local ? local.split(',') : []
+            if(!mark.includes(id)){
+                let xhr = new XMLHttpRequest();
+                xhr.open('PUT', window.location.href, false);
+                xhr.setRequestHeader("X-Requested-With","XMLHttpRequest");
+                xhr.send();
+                mark.push(id);
+                localStorage.setItem("mark", mark.toString());
+            }
+        }
+    </script>
+{{end}}

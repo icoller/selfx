@@ -1,0 +1,6 @@
+{{extends "../../template/layout/layout.html"}}
+{{block main()}}
+<div class="flex items-center w-full text-center card h-80">
+    <h3 class="flex-grow text-3xl">About Page Demo</h3>
+</div>
+{{end}}
