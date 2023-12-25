@@ -2,7 +2,7 @@
  * @Author: coller
  * @Date: 2023-12-20 21:46:14
  * @LastEditors: coller
- * @LastEditTime: 2023-12-25 14:35:09
+ * @LastEditTime: 2023-12-25 15:18:54
  * @Desc:
  */
 package controller
@@ -56,12 +56,12 @@ func (d *dashboard) Controller(ctx *fiber.Ctx) (err error) {
 		data, err = service.Article.CountLastFewDays(7)
 	case "articleLast30days":
 		data, err = service.Article.CountLastFewDays(30)
-	case "storeTotal":
-		data, err = service.Store.CountTotal()
-	case "storeToday":
-		data, err = service.Store.CountToday()
-	case "storeYesterday":
-		data, err = service.Store.CountYesterday()
+	case "crawlTotal":
+		data, err = service.Crawl.CountTotal()
+	case "crawlToday":
+		data, err = service.Crawl.CountToday()
+	case "crawlYesterday":
+		data, err = service.Crawl.CountYesterday()
 	case "categoryTotal":
 		data, err = service.Category.CountTotal()
 	case "tagTotal":

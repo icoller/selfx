@@ -45,7 +45,7 @@
 
 <script setup>
   import {useRequest} from "vue-request";
-  import {categoryTree} from "@/api/index.js";
+  import {categoryTree} from "@/api";
 
   const { data,showPageOption,disableOrder } = defineProps({data:Object, showPageOption:Boolean, disableOrder:Boolean})
   const {data:treeData,loading} = useRequest(categoryTree);

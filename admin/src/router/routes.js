@@ -1,6 +1,3 @@
-
-
-
 import layoutMain from '@/layout/main/index.vue'
 import { IconNav,IconDashboard,IconLayers,IconFile,IconTag,IconRelation,IconComputer,IconSettings,IconStorage } from '@arco-design/web-vue/es/icon';
 
@@ -28,38 +25,38 @@ export default [
                 component: () => import('@/views/dashboard/index.vue'),
             },
             {
-                path: '/articles',
-                name: 'articles',
+                path: '/article',
+                name: 'article',
                 meta: {icon:IconFile},
                 component: () => import('@/views/article/index.vue'),
             },
             {
-                path: '/categories',
-                name: 'categories',
+                path: '/category',
+                name: 'category',
                 meta: {icon:IconNav},
                 component:() => import('@/views/category/index.vue'),
             },
             {
-                path: '/tags',
+                path: '/tag',
                 name: 'tags',
                 meta: {icon:IconTag},
                 component: () => import('@/views/tag/index.vue'),
             },
             {
-                path: '/links',
-                name: 'links',
+                path: '/link',
+                name: 'link',
                 meta: {icon:IconRelation},
                 component: () => import('@/views/link/index.vue'),
             },
             {
-                path: '/storehouse',
-                name: 'storehouse',
+                path: '/crawl',
+                name: 'crawl',
                 meta: {icon:IconStorage},
-                component: () => import('@/views/store/index.vue'),
+                component: () => import('@/views/crawl/index.vue'),
             },
             {
-                path: '/logs',
-                name: 'logs',
+                path: '/log',
+                name: 'log',
                 redirect: { name: 'logs-item', params:{id:''} },
                 meta: {icon:IconComputer},
                 component: () => import('@/views/log/layout.vue'),
@@ -73,8 +70,8 @@ export default [
                 ]
             },
             {
-                path: '/plugins',
-                name: 'plugins',
+                path: '/plugin',
+                name: 'plugin',
                 meta: {icon:IconLayers},
                 component: () => import('@/views/plugin/index.vue'),
             },

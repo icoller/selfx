@@ -147,7 +147,7 @@ export default {
     disk: 'Disco',
     onCreate: 'En crear',
     onUpdate: 'En actualizar',
-    storehouse: 'Depósito',
+    crawl: 'Depósito',
     publish: 'Publicar',
     example: 'Ejemplo',
     new: 'Nuevo',
@@ -155,7 +155,7 @@ export default {
     random: 'Aleatorio',
     tls: 'TLS',
     needRestartApp: 'Requiere reiniciar la aplicación para que surta efecto',
-    selfxAbout: 'selfX significa musgo o musgo verde. Espero que selfX sea tan tenaz como el musgo, arraigando y prosperando en todas partes.',
+    selfxAbout: '',
     selfxInstructions: 'Este programa es de código abierto bajo la Licencia MIT y completamente gratuito de usar. Por favor, siéntete libre de usarlo con confianza. Si tienes alguna pregunta, puedes comunicarte con el autor. No lo uses para fines ilegales.',
 
     GenerateSlug: 'Generar Slug automáticamente',

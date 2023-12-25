@@ -2,7 +2,7 @@
  * @Author: coller
  * @Date: 2023-12-20 21:46:14
  * @LastEditors: coller
- * @LastEditTime: 2023-12-25 14:40:47
+ * @LastEditTime: 2023-12-25 15:32:26
  * @Desc:
  */
 package startup
@@ -55,7 +55,7 @@ func initPlugins() {
 		plugins.NewPreBuildArticleCache(),
 		plugins.NewPushToBaidu(),
 		plugins.NewMakeCarousel(),
-		plugins.NewPostStore(),
+		plugins.NewPostCrawl(),
 		plugins.NewDidiAuto(),
 	)
 

@@ -32,9 +32,6 @@
     import {upload} from "@/api";
     import { localeList } from "@/locale"
 
-
-
-
     const store = useStore()
     const record = inject('record')
     const valueHtml = ref()

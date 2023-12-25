@@ -12,7 +12,7 @@
 <script setup>
   import {ref, toRefs, watch} from 'vue'
   import {useRequest} from "vue-request";
-  import {upload as uploadAPI} from "@/api/index.js";
+  import {upload as uploadAPI} from "@/api";
 
   const props = defineProps({ modelValue:String, inputStyle:String })
   const {modelValue} = toRefs(props)

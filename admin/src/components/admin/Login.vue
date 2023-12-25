@@ -42,9 +42,9 @@
 <script setup>
   import {ref} from 'vue'
   import Locale from '@/components/app/Locale.vue'
-  import {adminCaptcha, adminExists, adminLogin} from "@/api/index.js";
+  import {adminCaptcha, adminExists, adminLogin} from "@/api";
   import {useRequest} from "vue-request";
-  import {useStore} from "@/store/index.js";
+  import {useStore} from "@/store";
   import {useRouter} from "vue-router"
   import {Message} from "@arco-design/web-vue";
   import {t} from "@/locale";

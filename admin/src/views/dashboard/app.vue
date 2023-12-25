@@ -45,9 +45,9 @@
 
 <script setup>
   import {useRequest} from "vue-request";
-  import {dashboardData} from "@/api/index.js";
+  import {dashboardData} from "@/api";
   import {computed,ref,watch} from "vue";
-  import {useParseBytesSize} from "@/hooks/utils.js";
+  import {useParseBytesSize} from "@/hooks/utils";
 
 
   const oldCPU = ref(0)

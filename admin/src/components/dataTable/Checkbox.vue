@@ -1,3 +1,10 @@
+<!--
+ * @Author: coller
+ * @Date: 2023-12-20 21:46:14
+ * @LastEditors: coller
+ * @LastEditTime: 2023-12-25 15:50:52
+ * @Desc:  
+-->
 <template>
   <template v-if="selectedKeys.length > 0">
     <a-dropdown :popup-max-height="false" trigger="hover">
@@ -21,7 +28,6 @@
     <a-tag class="ml-4 overflow-hidden" style="border-radius:18px;background-color: var(--color-fill-2)"
            @close="selectedKeys = []" closable>{{$t('checked')}} {{ selectedKeys.length }}</a-tag>
   </template>
-
   <a-modal v-if="modelName === 'article'|| modelName === 'category'" v-model:visible="setCategoryModelVisible" @ok="setCategoryHandle" simple>
     <SelectCategory v-model="setCategoryValue" />
   </a-modal>
@@ -32,9 +38,9 @@
 <script setup>
   import {inject,ref} from 'vue'
   import {useRequest} from "vue-request";
-  import {articleBatchSetCategory, categoryBatchSetParentCategory} from "@/api/index.js";
+  import {articleBatchSetCategory, categoryBatchSetParentCategory} from "@/api";
   import {Message} from '@arco-design/web-vue'
-  import {t} from "@/locale/index.js";
+  import {t} from "@/locale";
   import SelectCategory from "@/components/data/SelectCategory.vue"
 
 

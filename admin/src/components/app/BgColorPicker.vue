@@ -8,7 +8,7 @@
 <script setup>
   import {computed, ref} from "vue";
   import { NColorPicker,darkTheme } from 'naive-ui'
-  import {useStore} from "@/store/index.js";
+  import {useStore} from "@/store";
 
   const store = useStore()
   const show = ref(false)

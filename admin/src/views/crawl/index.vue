@@ -1,11 +1,15 @@
 <template>
-  <Table modelName="store" :columns="columns" order="id desc"  postWidth="600px"  formStyle="padding-right: 10px" formLayout="horizontal" :postComponent="postComponent" />
+  <Table modelName="crawl" :columns="columns" order="id desc" postWidth="600px"  formStyle="padding-right: 10px" formLayout="horizontal" :postComponent="postComponent">
+    <template #title>
+      <a-button size="small" type="primary" @click="onCreateRule">采集规则</a-button>
+    </template>
+  </Table>
 </template>
 
 <script setup>
-import {shallowRef} from 'vue'
+import { shallowRef } from 'vue'
 import Table from '@/components/dataTable/index.vue'
-import { searchFilter } from '@/components/dataTable/index.js'
+import { searchFilter } from '@/components/dataTable'
 import Post from './Post.vue'
 import {t} from '@/locale'
 
@@ -55,16 +59,19 @@ const columns = [
   },
   {
     title: t('createTime'),
-    dataIndex: 'store_create_time',
+    dataIndex: 'crawl_create_time',
     slotName:'time',
     width: 160,
     align:'right',
   },
   {
     title: t('publish'),
-    slotName:'storePost',
+    slotName:'crawlPost',
     width: 120,
     align:'center',
   },
 ];
+const onCreateRule = ()=>{
+
+}
 </script>

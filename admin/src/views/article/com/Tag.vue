@@ -40,10 +40,10 @@
     articleCreateTagByNameList,
     articleDeleteTagByIds, tableList,
     tagsByArticleID
-  } from "@/api/index.js";
-  import { existName, getIndexByName } from './tag.js'
-  import {useDeepCopy} from "@/hooks/utils.js";
-  import {listOption} from "@/components/dataTable/index.js";
+  } from "@/api";
+  import { existName, getIndexByName } from './tag'
+  import {useDeepCopy} from "@/hooks/utils";
+  import {listOption} from "@/components/dataTable";
 
   const record = inject('record')
 

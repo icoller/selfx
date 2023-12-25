@@ -1,5 +1,5 @@
 import axios from "axios"
-import {useStore} from "@/store";
+import { useStore } from "@/store";
 import { Message } from '@arco-design/web-vue';
 
 const _axios = axios.create({

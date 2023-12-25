@@ -33,7 +33,7 @@
 
   import {toRefs, ref, watch } from "vue";
   import {useRequest} from "vue-request";
-  import {categoryTree} from "@/api/index.js";
+  import {categoryTree} from "@/api";
 
   const props = defineProps({ modelValue:Number | Array, cascaderStyle:Object, disabledId:Number, multiple:Boolean })
   const emit = defineEmits(['update:modelValue'])

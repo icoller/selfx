@@ -148,7 +148,7 @@ export default {
     disk:'Disco',
     onCreate:'creazione',
     onUpdate:'aggiornamento',
-    storehouse:'Magazzino',
+    crawl:'Magazzino',
     publish:'Pubblica',
     example:'Esempio',
     new:'Nuovo',
@@ -156,7 +156,7 @@ export default {
     random:'Casuale',
     tls:'TLS',
     needRestartApp:'Richiede il riavvio dell applicazione per avere effetto',
-    selfxAbout:'selfX significa muschio o muschio verde. Spero che selfX possa essere tenace come il muschio, radicarsi e prosperare ovunque.',
+    selfxAbout:'',
     selfxInstructions:'Questo programma è open-source sotto la Licenza MIT e completamente gratuito da usare. Sentiti libero di usarlo con fiducia. Se hai domande',
 
 

@@ -28,7 +28,7 @@
 
 <script setup>
   import {inject,ref} from "vue";
-  import {useStore} from "@/store/index.js";
+  import {useStore} from "@/store";
   import {useStorage} from "@vueuse/core";
   import PostRightContent from "@/views/article/PostRightContent.vue";
 

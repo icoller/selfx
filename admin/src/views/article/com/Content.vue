@@ -23,7 +23,7 @@
   import ContentEditor from "@/views/article/com/ContentEditor.vue";
   import ContentHtmlCode from './ContentHtmlCode.vue'
   import {ref} from 'vue'
-  import {useStore} from "@/store/index.js";
+  import {useStore} from "@/store";
 
   const store = useStore()
   const visible = ref(false)

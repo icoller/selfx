@@ -1,27 +1,25 @@
 <template>
-
   <a-space class="mb-2" size="medium">
     <a-button size="small" type="primary" @click="onCreate">{{$t('create')}}</a-button>
     <Checkbox />
+    <slot name="title"></slot>
   </a-space>
-
   <a-table ref="table" row-key="id"
-           :style="{height:tableHeight + 'px'}"
-           :columns="columns"
-           :data="data"
-           :bordered="false"
-           :loading="loading || batchDeleteLoading"
-           filter-icon-align-left
-           :scroll="{x:'100%', y:tableHeight-78}"
-           :row-selection="rowSelection"
-           v-model:selectedKeys="selectedKeys"
-           v-model:pagination="pagination"
-           :virtual-list-props="params.limit > 100 ? {height:'100%'}: undefined"
-           @pageChange="pageChange"
-           @pageSizeChange="pageSizeChange"
-           @sorterChange="sorterChange"
-           @filterChange="filterChange">
-
+      :style="{height:tableHeight + 'px'}"
+      :columns="columns"
+      :data="data"
+      :bordered="false"
+      :loading="loading || batchDeleteLoading"
+      filter-icon-align-left
+      :scroll="{x:'100%', y:tableHeight-78}"
+      :row-selection="rowSelection"
+      v-model:selectedKeys="selectedKeys"
+      v-model:pagination="pagination"
+      :virtual-list-props="params.limit > 100 ? {height:'100%'}: undefined"
+      @pageChange="pageChange"
+      @pageSizeChange="pageSizeChange"
+      @sorterChange="sorterChange"
+      @filterChange="filterChange">
     <template #th>
       <th style="color:var(--color-text-3)"></th>
     </template>
@@ -69,53 +67,47 @@
       <span @click="useOpenLink" class="inline-block cursor-pointer hover:underline underline-offset-4 decoration-2 hover:text-blue-500">{{ record[column.dataIndex] }}</span>
     </template>
 
-    <template #storePost="{ record,rowIndex,column }">
-      <a-button type="outline" size="mini" @click="runStorePost(record.id)">{{$t('publish')}}</a-button>
+    <template #crawlPost="{ record,rowIndex,column }">
+      <a-button type="outline" size="mini" @click="runCrawlPost(record.id)">{{$t('publish')}}</a-button>
     </template>
-
     <template #tag="{ record,rowIndex,column }">
       <a-space>
         <a-tag size="mini" v-for="item in record[column.dataIndex]">{{ item }}</a-tag>
       </a-space>
     </template>
-
-
   </a-table>
-
-
   <a-modal v-model:visible="visiblePost" :width="postWidth" unmountOnClose titleAlign="start" :escToClose="false"
-           :mask-closable="false"
-           :mask-style="{backdropFilter: 'blur(2px)'}"
-           :body-style="{height:store.isMobile ? '100%':'calc(100% - 48px)', padding:store.isMobile ? '5px':'7px 10px'}"
-           modal-class="data-table-modal"
-           :modalStyle="{height:postHeight ? postHeight:undefined}"
-           :footer="false"
+    :mask-closable="false"
+    :mask-style="{backdropFilter: 'blur(2px)'}"
+    :body-style="{height:store.isMobile ? '100%':'calc(100% - 48px)', padding:store.isMobile ? '5px':'7px 10px'}"
+    modal-class="data-table-modal"
+    :modalStyle="{height:postHeight ? postHeight:undefined}"
+    :footer="false"
   >
-      <template #title>{{ postRecord.id > 0 ? $t('edit') : $t('create') }}</template>
-      <a-form ref="formRef" :layout="formLayout" auto-label-width class="w-full h-full" :model="postRecord" :style="formStyle">
-          <a-spin :loading="loadingGet" class="w-full h-full overflow-auto" :class="{'overflow-hidden':loadingGet}" :size="28">
-            <component v-bind:is="postComponent"></component>
-          </a-spin>
-        <a-divider :margin="store.isMobile ? 5:10" />
-        <a-space class="w-full flex justify-end">
-          <a-button @click="postCancel">{{$t('cancel')}}</a-button>
-          <a-button type="primary" @click="postSubmit" :disabled="loadingGet" :loading="loadingCreate || loadingUpdate">{{$t('confirm')}}</a-button>
-        </a-space>
-      </a-form>
+    <template #title>{{ postRecord.id > 0 ? $t('edit') : $t('create') }}</template>
+    <a-form ref="formRef" :layout="formLayout" auto-label-width class="w-full h-full" :model="postRecord" :style="formStyle">
+        <a-spin :loading="loadingGet" class="w-full h-full overflow-auto" :class="{'overflow-hidden':loadingGet}" :size="28">
+          <component v-bind:is="postComponent"></component>
+        </a-spin>
+      <a-divider :margin="store.isMobile ? 5:10" />
+      <a-space class="w-full flex justify-end">
+        <a-button @click="postCancel">{{$t('cancel')}}</a-button>
+        <a-button type="primary" @click="postSubmit" :disabled="loadingGet" :loading="loadingCreate || loadingUpdate">{{$t('confirm')}}</a-button>
+      </a-space>
+    </a-form>
   </a-modal>
-
 </template>
 
 <script setup>
   import {useRequest} from "vue-request";
   import {ref, reactive, computed, provide} from 'vue'
-  import {useStore} from "@/store/index.js";
+  import {useStore} from "@/store";
   import {useStorage} from "@vueuse/core";
   import Checkbox from "./Checkbox.vue";
   import ColumnSearch from "./ColumnSearch.vue";
   import Action from './slot/Action.vue'
   import { NTime } from 'naive-ui'
-  import {useOpenLink} from '@/hooks/utils.js'
+  import {useOpenLink} from '@/hooks/utils'
 
   import {
     tableList,
@@ -124,18 +116,18 @@
     tableBatchDelete,
     tableGet,
     tableCreate,
-    tableUpdate, linkStatus, storePost,
-  } from "@/api/index.js";
+    tableUpdate, linkStatus, crawlPost,
+  } from "@/api";
   import {
     batchDeleteOption,
     createOption,
     deleteOption,
     getOption,
     listOption,
-    paginationOption, storePostOption,
+    paginationOption, crawlPostOption,
     updateOption,
-  } from './index.js'
-  import {useAppendSiteURL} from "@/hooks/app/index.js";
+  } from './index'
+  import {useAppendSiteURL} from "@/hooks/app";
 
   const {columns, order,modelName, postWidth, postHeight, postComponent} = defineProps({
     columns: Object,
@@ -149,7 +141,7 @@
   })
   columns.push({ title: '', slotName:'action', align:'right', width:120 })
 
-  const store =useStore()
+  const store = useStore()
   const table = ref(null)
   const selectedKeys = ref([]);
   const tableHeight = computed(()=>store.mainHeight - 38)
@@ -179,7 +171,7 @@
   const { run:runGet, loading:loadingGet } = useRequest(tableGet, getOption(postRecord,postRecordGetSuccessCallback))
   const { run:runCreate, loading:loadingCreate } = useRequest(tableCreate, createOption(visiblePost, refresh, createBeforeCallback))
   const { run:runUpdate, loading:loadingUpdate } = useRequest(tableUpdate, updateOption(visiblePost, data, rowIndex, postRecord, updateSuccessCallback))
-  const { run:runStorePost } = useRequest(storePost, storePostOption(refreshList))
+  const { run:runCrawlPost } = useRequest(crawlPost, crawlPostOption(refreshList))
 
 
   provide('record', postRecord)

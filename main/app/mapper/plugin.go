@@ -2,7 +2,7 @@
  * @Author: coller
  * @Date: 2023-12-20 21:46:14
  * @LastEditors: coller
- * @LastEditTime: 2023-12-25 14:19:41
+ * @LastEditTime: 2023-12-25 15:30:20
  * @Desc:
  */
 package mapper
@@ -32,7 +32,7 @@ func PluginItemsToPluginInfoList(items []*entity.Plugin) (res []dto.PluginList) 
 	return
 }
 
-func StoreToArticlePost(item *model.Store) *model.ArticlePost {
+func CrawlToArticlePost(item *model.Crawl) *model.ArticlePost {
 	return &model.ArticlePost{
 		Article: model.Article{
 			ArticleBase: model.ArticleBase{

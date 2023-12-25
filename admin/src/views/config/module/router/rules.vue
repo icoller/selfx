@@ -93,7 +93,7 @@
 
 
 <script setup>
-  import {useCopy} from "@/hooks/utils.js";
+  import {useCopy} from "@/hooks/utils";
   import {inject} from "vue";
   import SitemapURL from '../sitemap/url.vue'
 

@@ -2,7 +2,7 @@
  * @Author: coller
  * @Date: 2023-12-20 21:46:14
  * @LastEditors: coller
- * @LastEditTime: 2023-12-25 13:58:52
+ * @LastEditTime: 2023-12-25 15:32:19
  * @Desc:
  */
 package mapper
@@ -62,7 +62,7 @@ func BodyToWhere(body []byte) (res context.Where, err error) {
 }
 
 type curdModel interface {
-	model.Article | model.Category | model.Tag | model.Link | model.ArticlePost | model.Store
+	model.Article | model.Category | model.Tag | model.Link | model.ArticlePost | model.Crawl
 }
 
 func BodyToCurdModel[M curdModel](body []byte) (_ *M, err error) {

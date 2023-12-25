@@ -1,5 +1,5 @@
 import {h} from "vue";
-import {IconSearch} from "@arco-design/web-vue/es/icon/index.js";
+import {IconSearch} from "@arco-design/web-vue/es/icon";
 import {Message} from "@arco-design/web-vue";
 import {t} from '@/locale'
 
@@ -7,8 +7,6 @@ export const searchFilter = {
     slotName: 'column-search',
     icon: () => h(IconSearch)
 }
-
-
 
 export function paginationOption(loadingCount, total, params, store){
     return {
@@ -87,7 +85,7 @@ export function updateOption(visiblePost, data, rowIndex, postRecord,successCall
     }
 }
 
-export function storePostOption(refreshList){
+export function crawlPostOption(refreshList){
     return {
         manual:true,
         onSuccess:(resp)=>{

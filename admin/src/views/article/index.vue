@@ -5,7 +5,7 @@
 <script setup>
   import {shallowRef} from 'vue'
   import Table from '@/components/dataTable/index.vue'
-  import { searchFilter } from '@/components/dataTable/index.js'
+  import { searchFilter } from '@/components/dataTable'
   import Post from './Post.vue'
   import {t} from '@/locale'
 

@@ -3,9 +3,9 @@
 
     <a-grid :cols="{ xs: 2, sm: 3, md: 4, lg:5 }" :colGap="12" :rowGap="12">
       <a-grid-item>
-        <a-statistic :title="$t('storehouse')" :value="storeTotal" :value-from="0" show-group-separator animation>
+        <a-statistic :title="$t('crawl')" :value="crawlTotal" :value-from="0" show-group-separator animation>
           <template #suffix><span class="ml-1 text-gray-500"><icon-storage /></span></template>
-          <template #extra><a-spin v-if="loadingStoreTotal" /></template>
+          <template #extra><a-spin v-if="loadingCrawlTotal" /></template>
         </a-statistic>
       </a-grid-item>
       <a-grid-item>
@@ -36,9 +36,9 @@
 <script setup>
 
   import {useRequest} from "vue-request";
-  import {dashboardData} from "@/api/index.js";
+  import {dashboardData} from "@/api";
 
-  const { data:storeTotal, loading:loadingStoreTotal } = useRequest(dashboardData, {defaultParams:['storeTotal']})
+  const { data:crawlTotal, loading:loadingCrawlTotal } = useRequest(dashboardData, {defaultParams:['crawlTotal']})
   const { data:categoryTotal, loading:loadingCategoryTotal } = useRequest(dashboardData, {defaultParams:['categoryTotal']})
   const { data:tagTotal, loading:loadingTagTotal } = useRequest(dashboardData, {defaultParams:['tagTotal']})
   const { data:linkTotal, loading:loadingLinkTotal } = useRequest(dashboardData, {defaultParams:['linkTotal']})

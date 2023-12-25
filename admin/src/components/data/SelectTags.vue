@@ -14,7 +14,7 @@
   import {toRefs, ref, watch, computed} from "vue";
 
   import {useRequest} from "vue-request";
-  import {tableList, tagGetByIds} from "@/api/index.js";
+  import {tableList, tagGetByIds} from "@/api";
 
   const props = defineProps({ modelValue:Array })
   const emit = defineEmits(['update:modelValue'])

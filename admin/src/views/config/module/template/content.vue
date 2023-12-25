@@ -1,3 +1,10 @@
+<!--
+ * @Author: coller
+ * @Date: 2023-12-20 21:46:14
+ * @LastEditors: coller
+ * @LastEditTime: 2023-12-25 15:43:39
+ * @Desc:  
+-->
 <template>
   <a-form-item label="Head" field="head">
     <a-textarea v-model="data.head" :auto-size="{minRows:5, maxRows:20}" />
@@ -46,8 +53,8 @@
 <script setup>
   import {inject} from 'vue'
   import {useStore} from "@/store";
-  import {useOpenLink} from "@/hooks/utils.js";
-  import {useSiteURL} from "@/hooks/app/index.js"
+  import {useOpenLink} from "@/hooks/utils";
+  import {useSiteURL} from "@/hooks/app"
 
   const data = inject('data')
   const store = useStore()

@@ -17,10 +17,10 @@
   import Sider from '@/layout/main/sider/index.vue'
   import Header from '@/layout/main/header/index.vue'
   import Login from '@/components/admin/Login.vue'
-  import {useStore} from "@/store/index.js";
+  import {useStore} from "@/store";
   import { useElementSize } from '@vueuse/core'
   import {ref, computed, onMounted, watch} from "vue";
-  import {configList} from "@/api/index.js";
+  import {configList} from "@/api";
   import {useRequest} from "vue-request";
   import {useRoute, useRouter} from 'vue-router'
 

@@ -3,9 +3,6 @@
     <div v-if="appInfo" class="mb-2 leading-8 italic">
       version {{ appInfo?.version }}
     </div>
-    <div class="mb-2 leading-8">
-      {{ $t('selfxAbout') }}<br>{{ $t('selfxInstructions') }}
-    </div>
     <a-link @click="useOpenLink">
       <template #icon><icon-github /></template>https://github.com/icoller/selfx
     </a-link>
@@ -15,8 +12,6 @@
 <script setup>
   import {useRequest} from "vue-request";
   import {useOpenLink} from '@/hooks/utils.js'
-  import {dashboardData} from "@/api/index.js";
-
-
+  import {dashboardData} from "@/api";
   const { data:appInfo } = useRequest(dashboardData, {defaultParams:['appInfo']})
 </script>

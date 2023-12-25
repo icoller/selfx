@@ -13,7 +13,7 @@ import (
 	"go.uber.org/zap"
 )
 
-type PostStore struct {
+type PostCrawl struct {
 	Limit           int   `json:"limit"`
 	Order           int   `json:"order"`             // 0:最新 1:最早 2:随机
 	CategoryIds     []int `json:"category_ids"`      // 指定栏目ID
@@ -21,8 +21,8 @@ type PostStore struct {
 	ctx             *pluginEntity.Plugin
 }
 
-func NewPostStore() *PostStore {
-	return &PostStore{
+func NewPostCrawl() *PostCrawl {
+	return &PostCrawl{
 		Limit:           1,
 		Order:           1,
 		DeleteOnFailure: true,
@@ -30,10 +30,10 @@ func NewPostStore() *PostStore {
 	}
 }
 
-func (p *PostStore) Info() *pluginEntity.PluginInfo {
+func (p *PostCrawl) Info() *pluginEntity.PluginInfo {
 	return &pluginEntity.PluginInfo{
-		ID:         "PostStore",
-		About:      "publish articles form storehouse",
+		ID:         "PostCrawl",
+		About:      "publish articles form Crawl",
 		RunEnable:  true,
 		CronEnable: true,
 		PluginInfoPersistent: pluginEntity.PluginInfoPersistent{
@@ -43,20 +43,17 @@ func (p *PostStore) Info() *pluginEntity.PluginInfo {
 	}
 }
 
-func (p *PostStore) Load(ctx *pluginEntity.Plugin) error {
+func (p *PostCrawl) Load(ctx *pluginEntity.Plugin) error {
 	return nil
 }
 
-func (p *PostStore) Run(ctx *pluginEntity.Plugin) (err error) {
+func (p *PostCrawl) Run(ctx *pluginEntity.Plugin) (err error) {
 	p.ctx = ctx
 
 	if p.Limit <= 0 {
 		p.ctx.Log.Warn("limit <= 0")
 		return
 	}
-
-	//p.ctx.Log.Info("Begin...", zap.Int("limit", p.Limit), zap.Ints("category", p.CategoryIds))
-
 	ids, err := p.ids()
 	if err != nil {
 		return
@@ -78,13 +75,13 @@ func (p *PostStore) Run(ctx *pluginEntity.Plugin) (err error) {
 	return nil
 }
 
-func (p *PostStore) post(id int, wg *sync.WaitGroup, success *int) {
+func (p *PostCrawl) post(id int, wg *sync.WaitGroup, success *int) {
 	defer wg.Done()
-	item, err := appService.StorePost(id)
+	item, err := appService.CrawlPost(id)
 	if err != nil {
 		p.ctx.Log.Error("post error", zap.Error(err), zap.Int("id", id))
 		if p.DeleteOnFailure {
-			if e := service.Store.Delete(id); e != nil {
+			if e := service.Crawl.Delete(id); e != nil {
 				p.ctx.Log.Error("delete error", zap.Error(err), zap.Int("id", id))
 			}
 		}
@@ -95,13 +92,13 @@ func (p *PostStore) post(id int, wg *sync.WaitGroup, success *int) {
 	return
 }
 
-func (p *PostStore) ids() (res []int, err error) {
-	var items []model.Store
+func (p *PostCrawl) ids() (res []int, err error) {
+	var items []model.Crawl
 	var ctx = context.Context{Select: "id", Limit: p.Limit, Order: p.order()}
 	if len(p.CategoryIds) > 0 {
-		items, err = service.Store.ListByCategoryIds(&ctx, p.CategoryIds)
+		items, err = service.Crawl.ListByCategoryIds(&ctx, p.CategoryIds)
 	} else {
-		items, err = service.Store.List(&ctx)
+		items, err = service.Crawl.List(&ctx)
 	}
 	if err != nil {
 		p.ctx.Log.Error("query list error", zap.Error(err))
@@ -113,7 +110,7 @@ func (p *PostStore) ids() (res []int, err error) {
 	return
 }
 
-func (p *PostStore) order() any {
+func (p *PostCrawl) order() any {
 	switch p.Order {
 	case 2:
 		return db.RandomOrder()

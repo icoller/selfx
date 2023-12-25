@@ -7,9 +7,9 @@
 </template>
 
 <script setup>
-  import {useOpenLink} from "@/hooks/utils.js";
-  import {useSiteURL} from "@/hooks/app/index.js"
-  import {useStore} from "@/store/index.js";
+  import {useOpenLink} from "@/hooks/utils";
+  import {useSiteURL} from "@/hooks/app"
+  import {useStore} from "@/store";
 
 
   const store = useStore()

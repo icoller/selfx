@@ -46,7 +46,7 @@ import {
 
 } from 'naive-ui'
 
-import {useStore} from "@/store/index.js";
+import {useStore} from "@/store";
 import {useNavigatorLanguage} from "@vueuse/core";
 
 export const defaultLocale = "en-us"

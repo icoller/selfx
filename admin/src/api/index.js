@@ -25,12 +25,7 @@ export const categoryBatchSetParentCategory = (parent_id,data)=> usePost(`/categ
 export const tagsByArticleID = (id) => useGetData(`/tag/list/article/${id}`);
 export const tagGetByIds = (ids) => usePostData(`/tag/getByIds`, ids);
 export const linkStatus = (id,status) => usePostData(`/link/status/${id}`, {status:status});
-export const storePost = (id) => usePost(`/store/post/${id}`);
-
-
-
-
-
+export const crawlPost = (id) => usePost(`/crawl/post/${id}`);
 
 export const logInit = () => usePost(`/log/init`);
 export const logRead = (id, params) => useGetData(`/log/read/${id}`,params);

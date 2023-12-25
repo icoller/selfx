@@ -15,7 +15,7 @@
   import SubMenuLayout from '@/layout/subMenu.vue'
   import {ref, watch} from "vue";
   import {useRoute} from "vue-router";
-  import {useStore} from "@/store/index.js";
+  import {useStore} from "@/store";
 
   const route = useRoute()
   const current = ref()

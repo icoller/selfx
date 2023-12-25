@@ -17,10 +17,10 @@
 
 <script setup>
 
-  import {useStore} from "@/store/index.js";
+  import {useStore} from "@/store";
   import {useRoute} from "vue-router";
   import {useRequest} from "vue-request";
-  import {configGet,configPost,configList} from "@/api/index.js";
+  import {configGet,configPost,configList} from "@/api";
   import {ref, shallowRef, defineAsyncComponent, provide, watch, onMounted} from 'vue'
   import {Message} from "@arco-design/web-vue";
   import {t} from '@/locale'

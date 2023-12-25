@@ -27,7 +27,7 @@
 <script setup>
 import {inject,ref} from 'vue'
 import {useRequest} from "vue-request";
-import {categoryTree} from "@/api/index.js";
+import {categoryTree} from "@/api";
 
 const data = inject('data')
 const {data:treeData,loading} = useRequest(categoryTree);

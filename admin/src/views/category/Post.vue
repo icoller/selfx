@@ -38,9 +38,9 @@
 
 <script setup>
   import {computed, inject} from "vue";
-  import {useStore} from "@/store/index.js";
-  import {useOpenLink} from '@/hooks/utils.js'
-  import {useAppendSiteURL} from "@/hooks/app/index.js";
+  import {useStore} from "@/store";
+  import {useOpenLink} from '@/hooks/utils'
+  import {useAppendSiteURL} from "@/hooks/app";
   import SelectCategory from "@/components/data/SelectCategory.vue"
 
   const record = inject('record')

@@ -1,5 +1,5 @@
 <template>
-  <a-card class="w-full" :title="$t('storehouse')" :bordered="false">
+  <a-card class="w-full" :title="$t('crawl')" :bordered="false">
 
     <a-grid :cols="{ xs: 2, sm: 3, md: 4 }" :colGap="12" :rowGap="12">
       <a-grid-item>
@@ -30,11 +30,11 @@
 <script setup>
 
   import {useRequest} from "vue-request";
-  import {dashboardData} from "@/api/index.js";
+  import {dashboardData} from "@/api";
 
-  const { data:total, loading:loadingTotal } = useRequest(dashboardData, {defaultParams:['storeTotal']})
-  const { data:today, loading:loadingToday } = useRequest(dashboardData, {defaultParams:['storeToday']})
-  const { data:yesterday, loading:loadingYesterday } = useRequest(dashboardData, {defaultParams:['storeYesterday']})
+  const { data:total, loading:loadingTotal } = useRequest(dashboardData, {defaultParams:['crawlTotal']})
+  const { data:today, loading:loadingToday } = useRequest(dashboardData, {defaultParams:['crawlToday']})
+  const { data:yesterday, loading:loadingYesterday } = useRequest(dashboardData, {defaultParams:['crawlYesterday']})
 
 
 </script>

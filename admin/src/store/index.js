@@ -3,7 +3,7 @@ import {useNavigatorLocale} from "@/locale";
 import {defineStore} from "pinia";
 import {useDefaultSiderCollapsed,useNavigatorDark} from "@/hooks/app";
 import {ref} from 'vue'
-import {useIsMobile} from "@/hooks/utils.js";
+import {useIsMobile} from "@/hooks/utils";
 
 export const useStore = defineStore('default', {
     state: () => ({

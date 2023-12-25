@@ -19,7 +19,6 @@
     <a-descriptions-item label="goroutine">
       <a-tag @click="useCopy" class="cursor-pointer">go tool pprof -http=:9090 {{domain}}{{path}}/debug/pprof/goroutine</a-tag>
     </a-descriptions-item>
-
   </a-descriptions>
 
 </template>
@@ -29,8 +28,8 @@
 
   import {computed, inject} from "vue";
   import MakeRandString from "@/components/utils/MakeRandString.vue";
-  import {useOpenLink,useCopy} from '@/hooks/utils.js'
-  import {useSiteURL} from '@/hooks/app/index.js'
+  import {useOpenLink,useCopy} from '@/hooks/utils'
+  import {useSiteURL} from '@/hooks/app'
   import {useStore} from '@/store'
 
   const data = inject('data')

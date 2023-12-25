@@ -147,7 +147,7 @@ export default {
     disk:'磁盤',
     onCreate:'創建時',
     onUpdate:'更新時',
-    storehouse:'倉庫',
+    crawl:'倉庫',
     publish:'發布',
     example:'示例',
     new:'新的',
@@ -155,7 +155,7 @@ export default {
     random:'隨機',
     tls:'TLS',
     needRestartApp:'需要重啟應用後生效',
-    selfxAbout:'selfX 苔蘚、青苔之意，希望selfX可以如青苔一樣，頑強的活著，遍地生根。',
+    selfxAbout:'',
     selfxInstructions:'本程序基於MIT協議開源，完全免費，請放心使用。不明白的地方可以與作者溝通。切勿用於非法用途。',
 
 

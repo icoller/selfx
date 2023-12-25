@@ -2,7 +2,6 @@
   <a-form-item field="name" :label="$t('name')" :rules="[{ required:true, message: $t('message.required',[$t('name')]) }]">
     <a-input v-model="record.name" :max-length="150" allow-clear show-word-limit />
   </a-form-item>
-
   <a-form-item field="slug" :label="$t('slug')" :rules="[{required:!!record.id, message:$t('message.required',[$t('slug')])}]">
     <div class="w-full">
       <a-input v-model="record.slug" :max-length="150" allow-clear show-word-limit />
@@ -24,7 +23,6 @@
   <a-form-item field="keywords" :label="$t('keywords')">
     <a-textarea class="input" v-model="record.keywords" :max-length="250" :auto-size="{minRows:3,maxRows:5}" show-word-limit />
   </a-form-item>
-
   <a-form-item field="create_time" :label="$t('createTime')">
     <a-date-picker class="w-full" v-model="createTime" value-format="timestamp" show-time @change="(val)=>record.create_time =parseInt(val / 1000)" />
   </a-form-item>
@@ -34,9 +32,9 @@
 
 <script setup>
   import {computed, inject} from "vue";
-  import {useStore} from "@/store/index.js";
-  import {useOpenLink} from '@/hooks/utils.js'
-  import {useAppendSiteURL} from "@/hooks/app/index.js";
+  import {useStore} from "@/store";
+  import {useOpenLink} from '@/hooks/utils'
+  import {useAppendSiteURL} from "@/hooks/app";
 
   const record = inject('record')
   const createTime = computed(()=>record.value.create_time*1000)

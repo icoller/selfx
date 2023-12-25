@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-  import {useCopy} from "@/hooks/utils.js";
+  import {useCopy} from "@/hooks/utils";
 
 
   const cronExpExample = [

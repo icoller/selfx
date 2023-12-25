@@ -23,7 +23,7 @@
   import SiderCollapsed from "./SiderCollapsed.vue";
   import Home from './Home.vue'
   import Breadcrumb from "./Breadcrumb.vue";
-  import {useStore} from "@/store/index.js";
+  import {useStore} from "@/store";
 
   const store =useStore()
 </script>

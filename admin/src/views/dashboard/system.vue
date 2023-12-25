@@ -28,8 +28,8 @@
 <script setup>
 
   import {useRequest} from "vue-request";
-  import {dashboardData} from "@/api/index.js";
-  import {useStore} from "@/store/index.js";
+  import {dashboardData} from "@/api";
+  import {useStore} from "@/store";
   import {computed, ref} from "vue";
 
   const store = useStore()

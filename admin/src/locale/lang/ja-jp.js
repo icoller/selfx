@@ -147,7 +147,7 @@ export default {
     disk:'ディスク',
     onCreate:'作成時',
     onUpdate:'更新時',
-    storehouse:'倉庫',
+    crawl:'倉庫',
     publish:'公開',
     example:'例',
     new:'新しい',
@@ -155,7 +155,7 @@ export default {
     random:'ランダム',
     tls:'TLS',
     needRestartApp:'再起動が必要です',
-    selfxAbout:'「SelfX」とは、苔または緑色の苔を意味します。 「SelfX」が苔のように強健で、根を張り、どこでも繁栄することを願っています。',
+    selfxAbout:'',
     selfxInstructions:'このプログラムは、MITライセンスの下でオープンソースであり、完全に無料で使用できます。安心してご利用ください。何か質問がある場合は、著者と連絡を取ることができます。違法目的に使用しないでください。',
 
 

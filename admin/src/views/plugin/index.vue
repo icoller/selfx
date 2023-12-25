@@ -78,10 +78,10 @@
     pluginOptions,
     pluginRun,
     pluginSaveOptions
-  } from "@/api/index.js";
+  } from "@/api";
   import {computed, defineAsyncComponent, provide, ref, shallowRef} from 'vue'
-  import {columns} from './index.js'
-  import {useStore} from "@/store/index.js";
+  import {columns} from './index'
+  import {useStore} from "@/store";
   import {Message} from '@arco-design/web-vue'
   import {t} from '@/locale'
   import Cron from "./Cron.vue";

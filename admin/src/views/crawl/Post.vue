@@ -1,3 +1,10 @@
+<!--
+ * @Author: coller
+ * @Date: 2023-12-20 21:46:14
+ * @LastEditors: coller
+ * @LastEditTime: 2023-12-25 15:43:45
+ * @Desc:  
+-->
 <template>
   <a-form-item field="title" :label="$t('title')" :rules="[{ required:true, message: $t('message.required',[$t('title')]) }]">
     <a-input v-model="record.title" :max-length="150" allow-clear show-word-limit />
@@ -71,8 +78,8 @@
 <script setup>
   import {computed, inject} from "vue";
   import UploadImgInput from '@/components/utils/UploadImgInput.vue'
-  import {useAppendSiteURL} from "@/hooks/app/index.js";
-  import {useStore} from "@/store/index.js";
+  import {useAppendSiteURL} from "@/hooks/app";
+  import {useStore} from "@/store";
 
   const record = inject('record')
   const createTime = computed(()=>record.value.create_time*1000)

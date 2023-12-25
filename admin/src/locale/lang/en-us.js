@@ -147,7 +147,7 @@ export default {
     disk:'Disk',
     onCreate:'On Create',
     onUpdate:'On Update',
-    storehouse:'Storehouse',
+    crawl:'Storehouse',
     publish:'Publish',
     example:'Example',
     new:'New',
@@ -155,7 +155,7 @@ export default {
     random:'Random',
     tls:'TLS',
     needRestartApp:'Requires application restart to take effect',
-    selfxAbout:'selfX means selfX or green selfX. I hope that selfX can be as tenacious as selfX, taking root and thriving everywhere.',
+    selfxAbout:'',
     selfxInstructions:'This program is open-source under the MIT License and completely free to use. Please feel free to use it with confidence. If you have any questions, you can communicate with the author. Do not use it for illegal purposes.',
 
 

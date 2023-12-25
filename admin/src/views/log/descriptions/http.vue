@@ -22,7 +22,7 @@
 
 <script setup>
   import { NTime } from 'naive-ui'
-  import {useOpenLink} from "@/hooks/utils.js";
+  import {useOpenLink} from "@/hooks/utils";
 
   defineProps({data:Object})
 

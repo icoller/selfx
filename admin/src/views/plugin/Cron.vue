@@ -1,5 +1,4 @@
 <template>
-
   <div class="h-full flex items-center gap-1">
     <a-switch :disabled="!record.cron_enable" size="mini" v-model="record.cron_start" @change="onChangeCronStart(record)" :loading="loadingCronStart || loadingCronStop" />
     <template v-if="record.cron_enable">
@@ -18,17 +17,15 @@
       </div>
     </template>
   </div>
-
 </template>
-
 
 <script setup>
 
   import {inject} from "vue";
   import {useRequest} from "vue-request";
-  import {pluginCronStop, pluginCronExp, pluginCronStart} from "@/api/index.js";
+  import {pluginCronStop, pluginCronExp, pluginCronStart} from "@/api";
   import {Message} from "@arco-design/web-vue";
-  import {t} from "@/locale/index.js";
+  import {t} from "@/locale";
 
   defineProps({record:Object})
   const visibleCronExpExample = inject("visibleCronExpExample")

@@ -147,7 +147,7 @@ export default {
     disk:'Disk',
     onCreate:'Pada Pembuatan',
     onUpdate:'Pada Pembaruan',
-    storehouse:'Gudang',
+    crawl:'Gudang',
     publish:'Terbitkan',
     example:'Contoh',
     new:'Baru',
@@ -155,7 +155,7 @@ export default {
     random:'Acak',
     tls:'TLS',
     needRestartApp:'Memerlukan restart aplikasi untuk berlaku',
-    selfxAbout:'selfX berarti lumut atau lumut hijau. Saya harap selfX dapat sekuat lumut, tumbuh subur di mana-mana.',
+    selfxAbout:'',
     selfxInstructions:'Program ini bersifat open-source dengan lisensi MIT dan sepenuhnya gratis untuk digunakan. Silakan gunakan dengan percaya diri. Jika Anda memiliki pertanyaan, Anda dapat berkomunikasi dengan penulis. Jangan gunakan untuk tujuan ilegal.',
 
 

@@ -87,15 +87,15 @@ func api(route fiber.Router) {
 	route.Post("/link/likeURL", controller.LinkLikeURL)
 	route.Post("/link/status/:id", controller.LinkStatus)
 
-	// store
-	route.Post("/store/list", controller.StoreList)
-	route.Post("/store/count", controller.StoreCount)
-	route.Get("/store/get/:id", controller.StoreGet)
-	route.Post("/store/create", controller.StoreCreate)
-	route.Post("/store/update", controller.StoreUpdate)
-	route.Post("/store/delete/:id", controller.StoreDelete)
-	route.Post("/store/batchDelete", controller.StoreBatchDelete)
-	route.Post("/store/post/:id", controller.StorePost)
+	// crawl
+	route.Post("/crawl/list", controller.CrawlList)
+	route.Post("/crawl/count", controller.CrawlCount)
+	route.Get("/crawl/get/:id", controller.CrawlGet)
+	route.Post("/crawl/create", controller.CrawlCreate)
+	route.Post("/crawl/update", controller.CrawlUpdate)
+	route.Post("/crawl/delete/:id", controller.CrawlDelete)
+	route.Post("/crawl/batchDelete", controller.CrawlBatchDelete)
+	route.Post("/crawl/post/:id", controller.CrawlPost)
 
 	// log
 	route.Post("/log/init", controller.LogInit)

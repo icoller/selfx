@@ -25,7 +25,7 @@
 
 <script setup>
   import {ref} from 'vue'
-  import {useStore} from "@/store/index.js";
+  import {useStore} from "@/store";
 
   const collapsed = ref(false)
   const store = useStore()

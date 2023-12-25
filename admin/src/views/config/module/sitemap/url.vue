@@ -16,7 +16,7 @@
 <script setup>
 
   import {useStore} from "@/store";
-  import {useOpenLink} from "@/hooks/utils.js";
+  import {useOpenLink} from "@/hooks/utils";
   import {computed} from "vue";
   import {useAppendSiteURL} from "@/hooks/app";
 

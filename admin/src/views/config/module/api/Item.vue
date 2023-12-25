@@ -1,13 +1,13 @@
 <template>
   <div class="pt-3">
-    <a-card v-for="row in data" :title="row.title" class="mb-5">
+    <a-card v-for="(row,index) in data" :key="index" :title="row.title" class="mb-5">
       <div class="w-full mb-4">
         <a-tag size="large" color="arcoblue">{{row.method}}</a-tag>
         <a-tag size="large" class="mx-2">{{apiURL + row.url}}</a-tag>
         <icon-copy @click="useCopy(apiURL + row.url)" class="cursor-pointer hover:text-blue-500" />
       </div>
       <a-table size="small" v-if="row.payload" :columns="columns" :data="row.payload" :pagination="false">
-          <template #required="{ record,rowIndex }">
+          <template #required="{ record }">
            <icon-check-circle-fill v-if="record.required" style="color:rgb(var(--arcoblue-6))" />
            <span v-else> - </span>
           </template>
@@ -22,8 +22,8 @@
   import {useCopy} from "@/hooks/utils";
   import {useStore} from "@/store";
   import {computed, h} from "vue";
-  import {t} from "@/locale/index.js";
-  import {useAppendSiteURL} from "@/hooks/app/index.js";
+  import {t} from "@/locale";
+  import {useAppendSiteURL} from "@/hooks/app";
 
   defineProps({data:Object})
   const store = useStore()

@@ -71,8 +71,8 @@
 <script setup>
   import {computed, inject, ref} from "vue";
   import {useLoadMore} from "vue-request";
-  import {pluginLogList} from "@/api/index.js";
-  import {useDeepCopy} from "@/hooks/utils.js";
+  import {pluginLogList} from "@/api";
+  import {useDeepCopy} from "@/hooks/utils";
   import { NTime } from 'naive-ui'
 
   const id = inject("currentID")

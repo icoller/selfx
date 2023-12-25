@@ -1,4 +1,4 @@
-import {useDeepCopy} from "@/hooks/utils.js";
+import {useDeepCopy} from "@/hooks/utils";
 
 export const columnAPP = [
     {

@@ -1,11 +1,17 @@
+/*
+ * @Author: coller
+ * @Date: 2023-12-20 21:46:14
+ * @LastEditors: coller
+ * @LastEditTime: 2023-12-25 15:15:10
+ * @Desc: 素材库
+ */
 package model
 
 import "selfx/app/model/helper"
 
-type Store struct {
-	// store字段
+type Crawl struct {
 	ID              int   `gorm:"type:int;size:32;primaryKey;autoIncrement" json:"id"`
-	StoreCreateTime int64 `gorm:"type:int;size:32;index"                    json:"store_create_time"`
+	CrawlCreateTime int64 `gorm:"type:int;size:32;index"                    json:"crawl_create_time"`
 
 	// 可索引字段
 	Slug       string `gorm:"type:varchar(150);default:'';index"  json:"slug"`

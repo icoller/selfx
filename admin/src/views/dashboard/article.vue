@@ -48,7 +48,7 @@
 <script setup>
 
   import {useRequest} from "vue-request";
-  import {dashboardData} from "@/api/index.js";
+  import {dashboardData} from "@/api";
 
   const { data:total, loading:loadingTotal } = useRequest(dashboardData, {defaultParams:['articleTotal']})
   const { data:today, loading:loadingToday } = useRequest(dashboardData, {defaultParams:['articleToday']})

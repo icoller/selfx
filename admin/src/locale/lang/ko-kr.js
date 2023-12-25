@@ -150,7 +150,7 @@ export default {
     disk: '디스크',
     onCreate: '생성 시',
     onUpdate: '업데이트 시',
-    storehouse: '창고',
+    crawl: '창고',
     publish: '게시',
     example: '예시',
     new: '새로운',
@@ -158,7 +158,7 @@ export default {
     random: '무작위',
     tls: 'TLS',
     needRestartApp: '적용하려면 애플리케이션을 다시 시작해야 합니다.',
-    selfxAbout:'SelfX는 이끼 또는 녹색 이끼를 뜻합니다. SelfX가 이끼처럼 완강하게, 어디에나 뿌리 내리고 번성할 수 있기를 바랍니다.',
+    selfxAbout:'',
     selfxInstructions:'이 프로그램은 MIT 라이센스에 따라 오픈소스이며 완전히 무료로 사용할 수 있습니다. 자신감을 가지고 자유롭게 사용하십시오. 궁금한 점이 있으면 저자와 소통할 수 있습니다. 불법적인 목적으로 사용하지 마십시오.',
 
 

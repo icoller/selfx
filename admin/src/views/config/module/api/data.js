@@ -114,17 +114,17 @@ function linkPayload(t){
 }
 
 
-// store
-export const store = computed(()=>[
-    {title: 'Create', method: 'POST', url: '/store/create', payload:storePayload()},
-    {title: 'Update', method: 'POST', url: '/store/update', payload:storePayload('update')},
-    {title: 'Get', method: 'GET', url: '/store/get/:id'},
-    {title: 'List', method: 'POST', url: '/store/list', payload:getListPayLoad},
-    {title: 'Delete', method: 'POST', url: '/store/delete/:id'},
-    {title: $t('publish'), method: 'POST', url: '/store/post/:id'},
+// crawl
+export const crawl = computed(()=>[
+    {title: 'Create', method: 'POST', url: '/crawl/create', payload:crawlPayload()},
+    {title: 'Update', method: 'POST', url: '/crawl/update', payload:crawlPayload('update')},
+    {title: 'Get', method: 'GET', url: '/crawl/get/:id'},
+    {title: 'List', method: 'POST', url: '/crawl/list', payload:getListPayLoad},
+    {title: 'Delete', method: 'POST', url: '/crawl/delete/:id'},
+    {title: $t('publish'), method: 'POST', url: '/crawl/post/:id'},
 ])
 
-function storePayload(t){
+function crawlPayload(t){
     let res = [
         {field:'title',type:'string', required:true, description:$t('title')},
         {field:'content',type:'string', required:true, description:$t('content')},

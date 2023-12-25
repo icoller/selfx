@@ -1,5 +1,4 @@
 <template>
-
     <div class="p-3 shadow-md" :class="{border:!store.dark}" style="background-color: var(--color-bg-1)">
       <a-space direction="vertical">
         <a-input :model-value="filterValue[0]" :placeholder="$t('search')" @input="(value)=>setFilterValue([value,filterValue[1]])" />
@@ -12,11 +11,10 @@
         </div>
       </a-space>
     </div>
-
 </template>
 
 <script setup>
-  import {useStore} from "@/store/index.js";
+  import {useStore} from "@/store";
 
   defineProps({filterValue:Object,setFilterValue:Function,handleFilterReset:Function,handleFilterConfirm:Function})
   const store = useStore()

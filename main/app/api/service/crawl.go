@@ -2,7 +2,7 @@
  * @Author: coller
  * @Date: 2023-12-20 21:46:14
  * @LastEditors: coller
- * @LastEditTime: 2023-12-25 13:31:10
+ * @LastEditTime: 2023-12-25 15:30:13
  * @Desc:
  */
 package service
@@ -13,15 +13,15 @@ import (
 	"selfx/app/service"
 )
 
-// StorePost 发布仓库文章
-func StorePost(id int) (post *model.ArticlePost, err error) {
-	item, err := service.Store.Get(id)
+// CrawlPost 发布仓库文章
+func CrawlPost(id int) (post *model.ArticlePost, err error) {
+	item, err := service.Crawl.Get(id)
 	if err != nil {
 		return
 	}
-	post = mapper.StoreToArticlePost(item)
+	post = mapper.CrawlToArticlePost(item)
 	if err = ArticlePost("create", post); err != nil {
 		return
 	}
-	return post, service.Store.Delete(id)
+	return post, service.Crawl.Delete(id)
 }
