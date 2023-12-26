@@ -13,11 +13,15 @@ type Router struct {
 }
 
 func Register(route fiber.Router) {
-
+	// 管理
 	route.Get("/admin/exists", controller.AdminExists)
 	route.Post("/admin/create", controller.AdminCreate)
 	route.Get("/admin/captcha", controller.AdminCaptcha)
 	route.Post("/admin/login", controller.AdminLogin)
+
+	//用户
+	route.Post("/user/register", controller.UserRegister)
+	route.Post("/comment/add", controller.CommentAdd) // 添加评论
 
 	route.Use(auth())
 

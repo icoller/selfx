@@ -64,8 +64,12 @@ require (
 	github.com/dgryski/go-farm v0.0.0-20190423205320-6a90982ecee2 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/dustin/go-humanize v1.0.1 // indirect
+	github.com/gabriel-vasile/mimetype v1.4.2 // indirect
 	github.com/glebarez/go-sqlite v1.21.2 // indirect
 	github.com/go-ole/go-ole v1.2.6 // indirect
+	github.com/go-playground/locales v0.14.1 // indirect
+	github.com/go-playground/universal-translator v0.18.1 // indirect
+	github.com/go-playground/validator/v10 v10.16.0 // indirect
 	github.com/go-sql-driver/mysql v1.7.0 // indirect
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
@@ -84,6 +88,7 @@ require (
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 	github.com/klauspost/compress v1.15.9 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.3 // indirect
+	github.com/leodido/go-urn v1.2.4 // indirect
 	github.com/lufia/plan9stats v0.0.0-20211012122336-39d0f177ccd0 // indirect
 	github.com/magiconair/properties v1.8.7 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
