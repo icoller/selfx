@@ -55,12 +55,10 @@ func (r *Router) newFiber() *fiber.App {
 
 	// TLS
 	app.Use(middleware.TLS)
-
-	// web config.Config.Router.GetAdminPath()
-	app.Route("/", webRouter.Register)
-
 	// API
 	app.Route("/api", apiRouter.Register)
+	// web config.Config.Router.GetAdminPath()
+	app.Route("/", webRouter.Register)
 	return app
 }
 
