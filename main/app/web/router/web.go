@@ -2,7 +2,7 @@
  * @Author: coller
  * @Date: 2023-12-20 21:46:14
  * @LastEditors: coller
- * @LastEditTime: 2023-12-25 17:53:29
+ * @LastEditTime: 2023-12-26 10:53:53
  * @Desc: 路由
  */
 package router
@@ -33,7 +33,7 @@ func Register(route fiber.Router) {
 		// pwa文件 manifest.webmanifest 的类型是 application/octet-stream
 		[]string{"text/html", "javascript", "text/css", "application/octet-stream"}))
 
-	route.Use("/", filesystem.New(filesystem.Config{
+	route.Use(config.Config.Router.GetAdminPath(), filesystem.New(filesystem.Config{
 		Root:         http.FS(resources.Admin()),
 		Index:        "index.html",
 		NotFoundFile: "index.html",

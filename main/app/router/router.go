@@ -34,7 +34,7 @@ func New() *Router {
 func (r *Router) newFiber() *fiber.App {
 	app := fiber.New(config.Config.Router.GetOptions())
 
-	// pprof
+	// pprof 性能分析
 	var pprofPrefix = ""
 	if config.Config.Router.PprofSecret != "" {
 		pprofPrefix = "/" + config.Config.Router.PprofSecret
@@ -57,7 +57,7 @@ func (r *Router) newFiber() *fiber.App {
 	app.Use(middleware.TLS)
 	// API
 	app.Route("/api", apiRouter.Register)
-	// web config.Config.Router.GetAdminPath()
+	// WEB
 	app.Route("/", webRouter.Register)
 	return app
 }

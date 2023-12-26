@@ -2,7 +2,7 @@
  * @Author: coller
  * @Date: 2023-12-20 22:04:25
  * @LastEditors: coller
- * @LastEditTime: 2023-12-25 12:28:26
+ * @LastEditTime: 2023-12-26 10:48:04
  * @Desc: 入口
  */
 package main
@@ -13,9 +13,7 @@ import (
 )
 
 func main() {
-
-	err := router.New().Run()
-	if err != nil {
+	if err := router.New().Run(); err != nil {
 		panic(err)
 	}
 }

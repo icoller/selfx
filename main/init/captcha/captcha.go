@@ -8,7 +8,7 @@ import (
 	"image"
 	"image/color"
 	"image/png"
-	"io/ioutil"
+	"selfx/resources"
 	"strings"
 	"time"
 
@@ -64,7 +64,7 @@ func New(val ...Options) *Captcha {
 	draw.SetFrontColor(opt.FrontColor...)
 	draw.SetBkgColor(opt.BackgroundColor...)
 
-	font, _ := ioutil.ReadFile("app/comic.ttf")
+	font, _ := resources.App.ReadFile("app/comic.ttf")
 	_ = draw.AddFontFromBytes(font)
 	return &Captcha{store: store, draw: draw}
 }

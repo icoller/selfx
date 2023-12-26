@@ -3,7 +3,8 @@ import { useStore } from "@/store";
 import { Message } from '@arco-design/web-vue';
 
 const _axios = axios.create({
-    baseURL: process.env.NODE_ENV === "production" ? "/{{__DIR__}}/api" : "/api",
+    // /{{__DIR__}}
+    baseURL: process.env.NODE_ENV === "production" ? "/api" : "/api",
 });
 
 // 请求拦截

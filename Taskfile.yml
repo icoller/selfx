@@ -104,7 +104,7 @@ tasks:
   ######
   _build:
     vars:
-      FILE_NAME: 'gocms_{{.GOOS}}_{{.GOARCH}}{{.FILE_EXT}}'
+      FILE_NAME: 'selfx_{{.GOOS}}_{{.GOARCH}}{{.FILE_EXT}}'
       BUILD_FILE_PATH: '{{.ROOT_DIR}}/dist/{{.FILE_NAME}}'
       BACKUP_FILE_PATH: '{{.ROOT_DIR}}/dist/backup/{{.FILE_NAME}}_{{now | date "2006.01.02.15.04.05"}}'
     env:
