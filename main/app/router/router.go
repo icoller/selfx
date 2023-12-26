@@ -6,8 +6,8 @@ import (
 	"net"
 	"selfx/app/api/dto"
 	apiRouter "selfx/app/api/router"
-	webRouter "selfx/app/api/router"
 	"selfx/app/middleware"
+	webRouter "selfx/app/web/router"
 	"selfx/config"
 	"selfx/init/conf"
 	"selfx/init/log"
@@ -56,10 +56,11 @@ func (r *Router) newFiber() *fiber.App {
 	// TLS
 	app.Use(middleware.TLS)
 
-	// API
-	app.Route("/", apiRouter.Register)
 	// web config.Config.Router.GetAdminPath()
 	app.Route("/", webRouter.Register)
+
+	// API
+	app.Route("/api", apiRouter.Register)
 	return app
 }
 
@@ -114,5 +115,5 @@ func (r *Router) ln() (ln net.Listener, err error) {
 
 func (r *Router) ReloadRouter(ctx *fiber.Ctx) error {
 	r.Reload()
-	return ctx.JSON(dto.MessageResult{Success: true})
+	return ctx.JSON(dto.Result{Succ: true})
 }

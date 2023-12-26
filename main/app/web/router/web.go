@@ -2,8 +2,8 @@
  * @Author: coller
  * @Date: 2023-12-20 21:46:14
  * @LastEditors: coller
- * @LastEditTime: 2023-12-25 12:25:59
- * @Desc:
+ * @LastEditTime: 2023-12-25 17:53:29
+ * @Desc: 路由
  */
 package router
 
@@ -12,8 +12,8 @@ import (
 	"path/filepath"
 	"selfx/app/middleware"
 	"selfx/app/web/controller"
+	"selfx/config"
 	"selfx/constant"
-	"selfx/domain/config"
 	"selfx/init/template"
 	"selfx/resources"
 	"strings"
@@ -22,11 +22,8 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/filesystem"
 )
 
-type Router struct {
-	app *fiber.App
-}
-
-func (r *Router) Register(route fiber.Router) {
+func Register(route fiber.Router) {
+	route.Get("/test", controller.Test)
 	// 后端访问地址
 	route.Use(middleware.ReplaceBodyContent(
 		map[string]string{

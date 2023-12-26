@@ -2,10 +2,10 @@ package controller
 
 import (
 	"errors"
-	appService "selfx/app/api/service"
 	"selfx/app/service"
+	webServ "selfx/app/web/service"
+	"selfx/config"
 	"selfx/constant"
-	"selfx/domain/config"
 	"selfx/init/log"
 	"selfx/init/template"
 
@@ -14,7 +14,7 @@ import (
 )
 
 func HomeIndex(ctx *fiber.Ctx) error {
-	b, err := appService.Render.Index()
+	b, err := webServ.Render.Index()
 	if err != nil {
 		log.Error("index controller failed", log.Err(err))
 		return ctx.SendStatus(500)
@@ -32,7 +32,7 @@ func HomeCategory(ctx *fiber.Ctx) error {
 	if config.Config.Template.CategoryPageList.MaxPage > 0 && page > config.Config.Template.CategoryPageList.MaxPage {
 		return ctx.SendStatus(404)
 	}
-	b, err := appService.Render.CategoryBySlug(slug, page)
+	b, err := webServ.Render.CategoryBySlug(slug, page)
 	if err != nil {
 		if errors.Is(err, constant.ErrRecordNotFound) {
 			return ctx.Next()
@@ -53,7 +53,7 @@ func HomeTag(ctx *fiber.Ctx) error {
 	if config.Config.Template.TagPageList.MaxPage > 0 && page > config.Config.Template.TagPageList.MaxPage {
 		return ctx.SendStatus(404)
 	}
-	b, err := appService.Render.TagBySlug(slug, page)
+	b, err := webServ.Render.TagBySlug(slug, page)
 	if err != nil {
 		if errors.Is(err, constant.ErrRecordNotFound) {
 			return ctx.Next()
@@ -67,7 +67,7 @@ func HomeTag(ctx *fiber.Ctx) error {
 
 func HomeArticle(ctx *fiber.Ctx) error {
 	slug := ctx.Params("slug")
-	b, err := appService.Render.ArticleBySlug(slug)
+	b, err := webServ.Render.ArticleBySlug(slug)
 	if err != nil {
 		if errors.Is(err, constant.ErrRecordNotFound) {
 			return ctx.Next()

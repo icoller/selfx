@@ -2,13 +2,13 @@
  * @Author: coller
  * @Date: 2023-12-20 21:46:14
  * @LastEditors: coller
- * @LastEditTime: 2023-12-25 12:37:47
+ * @LastEditTime: 2023-12-25 17:51:54
  * @Desc:
  */
 package controller
 
 import (
-	"selfx/app/api/service"
+	"selfx/app/web/service"
 	"selfx/init/log"
 	"strings"
 

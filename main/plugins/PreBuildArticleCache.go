@@ -2,17 +2,17 @@
  * @Author: coller
  * @Date: 2023-12-20 21:46:14
  * @LastEditors: coller
- * @LastEditTime: 2023-12-25 14:24:08
+ * @LastEditTime: 2023-12-25 17:54:18
  * @Desc:
  */
 package plugins
 
 import (
 	"fmt"
-	appService "selfx/app/api/service"
 	"selfx/app/model"
 	pluginEntity "selfx/app/plugin/entity"
 	"selfx/app/service"
+	webServ "selfx/app/web/service"
 	"selfx/config"
 	"selfx/init/cache"
 
@@ -68,7 +68,7 @@ func (d *PreBuildArticleCache) build(item *model.Article, action string) {
 		return
 	}
 
-	bytes, err := appService.Render.Article(item)
+	bytes, err := webServ.Render.Article(item)
 	if err != nil {
 		d.ctx.Log.Error("render error", zap.Error(err), zap.Int("id", item.ID))
 		return

@@ -2,8 +2,8 @@
  * @Author: coller
  * @Date: 2023-12-20 21:46:14
  * @LastEditors: coller
- * @LastEditTime: 2023-12-25 15:15:10
- * @Desc: 素材库
+ * @LastEditTime: 2023-12-25 16:47:42
+ * @Desc: 采集数据
  */
 package model
 
@@ -16,7 +16,7 @@ type Crawl struct {
 	// 可索引字段
 	Slug       string `gorm:"type:varchar(150);default:'';index"  json:"slug"`
 	Title      string `gorm:"type:varchar(250);default:'';index"  json:"title"`
-	CategoryID int    `gorm:"type:int; size:32;default:0; index"  json:"category_id"`
+	CategoryID int    `gorm:"type:int; size:32;default:0;index"  json:"category_id"`
 
 	// 其他字段
 	Thumbnail    string             `gorm:"type:varchar(250);default:''"  json:"thumbnail"`

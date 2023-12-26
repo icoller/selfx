@@ -1,17 +1,25 @@
 <template>
   <Table modelName="crawl" :columns="columns" order="id desc" postWidth="600px"  formStyle="padding-right: 10px" formLayout="horizontal" :postComponent="postComponent">
     <template #title>
-      <a-button size="small" type="primary" @click="onCreateRule">采集规则</a-button>
+      <a-button size="small" type="primary" @click="onRuleAdd">采集规则</a-button>
     </template>
   </Table>
+  <a-modal v-model:visible="ruleVisible" @cancel="handleCancel" :on-before-ok="handleBeforeOk" unmountOnClose>
+    <template #title>
+      采集规则
+    </template>
+    <div> 收拾收拾
+    </div>
+  </a-modal>
 </template>
 
 <script setup>
-import { shallowRef } from 'vue'
+import { ref, shallowRef } from 'vue'
 import Table from '@/components/dataTable/index.vue'
 import { searchFilter } from '@/components/dataTable'
 import Post from './Post.vue'
 import {t} from '@/locale'
+const ruleVisible = ref(false);
 
 const postComponent = shallowRef(Post);
 const columns = [
@@ -71,7 +79,7 @@ const columns = [
     align:'center',
   },
 ];
-const onCreateRule = ()=>{
-
+const onRuleAdd = ()=>{
+  ruleVisible.value = true;
 }
 </script>

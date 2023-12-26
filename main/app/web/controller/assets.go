@@ -1,8 +1,15 @@
+/*
+ * @Author: coller
+ * @Date: 2023-12-20 21:46:14
+ * @LastEditors: coller
+ * @LastEditTime: 2023-12-25 17:47:56
+ * @Desc:
+ */
 package controller
 
 import (
 	"encoding/base64"
-	"selfx/domain/config"
+	"selfx/config"
 	"strings"
 
 	"github.com/gofiber/fiber/v2"

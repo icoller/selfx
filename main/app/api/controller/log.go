@@ -18,7 +18,7 @@ import (
 
 func LogInit(ctx *fiber.Ctx) error {
 	log.Init()
-	return ctx.JSON(mapper.MessageResult(nil))
+	return ctx.JSON(mapper.Result(nil))
 }
 
 func LogRead(ctx *fiber.Ctx) error {
@@ -30,5 +30,5 @@ func LogRead(ctx *fiber.Ctx) error {
 	if limit == 0 {
 		limit = 100
 	}
-	return ctx.JSON(mapper.MessageResultData(service.LogRead(ctx.Params("id"), page, limit)))
+	return ctx.JSON(mapper.ResultData(service.LogRead(ctx.Params("id"), page, limit)))
 }

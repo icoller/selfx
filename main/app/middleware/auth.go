@@ -2,7 +2,7 @@
  * @Author: coller
  * @Date: 2023-12-20 21:46:14
  * @LastEditors: coller
- * @LastEditTime: 2023-12-25 12:38:34
+ * @LastEditTime: 2023-12-25 16:35:07
  * @Desc:
  */
 package middleware
@@ -30,12 +30,12 @@ func Auth(attrName string, predicate func(token string) (roleName string, ok boo
 		}
 
 		if token == "" {
-			return ctx.Status(401).JSON(&dto.MessageResult{Message: "authorization failed"})
+			return ctx.Status(401).JSON(&dto.Result{Msg: "authorization failed"})
 		}
 
 		roleName, ok := predicate(token)
 		if !ok {
-			return ctx.Status(401).JSON(&dto.MessageResult{Message: "authorization failed"})
+			return ctx.Status(401).JSON(&dto.Result{Msg: "authorization failed"})
 		}
 
 		ctx.Locals("roleName", roleName)

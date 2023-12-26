@@ -69,7 +69,7 @@ func (d *dashboard) Controller(ctx *fiber.Ctx) (err error) {
 	case "linkTotal":
 		data, err = service.Link.CountTotal()
 	default:
-		return ctx.JSON(mapper.MessageResult(errors.New("id is undefined")))
+		return ctx.JSON(mapper.Result(errors.New("id is undefined")))
 	}
-	return ctx.JSON(mapper.MessageResultData(data, err))
+	return ctx.JSON(mapper.ResultData(data, err))
 }

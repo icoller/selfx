@@ -13,10 +13,7 @@ type Router struct {
 }
 
 func Register(route fiber.Router) {
-	route.Route("/api", api, "api")
-}
 
-func api(route fiber.Router) {
 	route.Get("/admin/exists", controller.AdminExists)
 	route.Post("/admin/create", controller.AdminCreate)
 	route.Get("/admin/captcha", controller.AdminCaptcha)

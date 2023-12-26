@@ -2,8 +2,8 @@
  * @Author: coller
  * @Date: 2023-12-20 21:46:14
  * @LastEditors: coller
- * @LastEditTime: 2023-12-25 15:32:19
- * @Desc:
+ * @LastEditTime: 2023-12-25 16:35:29
+ * @Desc: 映射
  */
 package mapper
 
@@ -15,26 +15,26 @@ import (
 	"selfx/config"
 )
 
-func MessageResult(err error) *dto.MessageResult {
+func Result(err error) *dto.Result {
 	if err == nil {
-		return &dto.MessageResult{Success: true}
+		return &dto.Result{Succ: true}
 	}
-	return &dto.MessageResult{Message: err.Error()}
+	return &dto.Result{Msg: err.Error()}
 }
 
-func MessageResultData(data any, err error) *dto.MessageResult {
+func ResultData(data any, err error) *dto.Result {
 	if err == nil {
-		return &dto.MessageResult{Success: true, Data: data}
+		return &dto.Result{Succ: true, Data: data}
 	}
-	return &dto.MessageResult{Message: err.Error()}
+	return &dto.Result{Msg: err.Error()}
 }
 
-func MessageFail(msg string) *dto.MessageResult {
-	return &dto.MessageResult{Message: msg}
+func Fail(msg string) *dto.Result {
+	return &dto.Result{Msg: msg}
 }
 
-func MessageSuccess(msg string) *dto.MessageResult {
-	return &dto.MessageResult{Success: true, Message: msg}
+func Succ(msg string) *dto.Result {
+	return &dto.Result{Succ: true, Msg: msg}
 }
 
 func BodyParser(body []byte, ptr any) error {
