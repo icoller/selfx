@@ -2,14 +2,14 @@
  * @Author: coller
  * @Date: 2023-12-20 21:46:14
  * @LastEditors: coller
- * @LastEditTime: 2023-12-25 14:02:46
- * @Desc:
+ * @LastEditTime: 2023-12-27 11:58:38
+ * @Desc: 配置
  */
 package controller
 
 import (
 	"selfx/app/api/mapper"
-	"selfx/app/api/service"
+	"selfx/app/service"
 	"selfx/config"
 
 	"github.com/gofiber/fiber/v2"
@@ -36,5 +36,6 @@ func ConfigUpdateAdmin(ctx *fiber.Ctx) error {
 	if err != nil {
 		return ctx.JSON(mapper.Result(err))
 	}
-	return ctx.JSON(mapper.Result(service.AdminUpdate(obj.Username, obj.Password, obj.LoginExpire)))
+	var service *service.AdminService
+	return ctx.JSON(mapper.Result(service.Update(obj.Username, obj.Password, obj.LoginExpire)))
 }

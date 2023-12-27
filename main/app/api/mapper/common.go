@@ -2,17 +2,22 @@
  * @Author: coller
  * @Date: 2023-12-20 21:46:14
  * @LastEditors: coller
- * @LastEditTime: 2023-12-25 16:35:29
+ * @LastEditTime: 2023-12-27 10:16:29
  * @Desc: 映射
  */
 package mapper
 
 import (
 	"encoding/json"
+	"errors"
+	"reflect"
 	"selfx/app/api/dto"
 	"selfx/app/model"
 	"selfx/app/repo/context"
 	"selfx/config"
+	"selfx/global"
+
+	"github.com/go-playground/validator/v10"
 )
 
 func Result(err error) *dto.Result {
@@ -79,4 +84,36 @@ func BodyToStrSet(body []byte) (res []string, err error) {
 func BodyToIntSet(body []byte) (res []int, err error) {
 	err = BodyParser(body, &res)
 	return
+}
+
+func BodyToModelCheck[M any](body []byte) (_ *M, err error) {
+	var obj M
+	if err = BodyParser(body, &obj); err != nil {
+		return nil, errors.New("数据解析错误")
+	}
+	ref := reflect.TypeOf(obj).Elem()
+	if err := global.VALID.Struct(obj); err != nil {
+		// 如果是输入参数无效，则直接返回输入参数错误
+		invalid, ok := err.(*validator.InvalidValidationError)
+		if ok {
+			return nil, errors.New("输入参数错误：" + invalid.Error())
+		}
+		validationErrs := err.(validator.ValidationErrors) // 断言是ValidationErrors
+		for _, validationErr := range validationErrs {
+			fieldName := validationErr.Field()      //获取是哪个字段不符合格式
+			field, ok := ref.FieldByName(fieldName) //通过反射获取filed
+			if ok {
+				errorInfo := field.Tag.Get("info") //info tag值
+				if errorInfo != "" {
+					return nil, errors.New(errorInfo) //返回错误
+				}
+			}
+			errorName := field.Tag.Get("name") //info tag值
+			if errorName != "" {
+				return nil, errors.New(errorName + "校验失败")
+			}
+			return nil, errors.New(fieldName + "校验失败")
+		}
+	}
+	return &obj, err
 }

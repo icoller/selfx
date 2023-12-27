@@ -2,7 +2,7 @@
  * @Author: coller
  * @Date: 2023-12-20 21:46:14
  * @LastEditors: coller
- * @LastEditTime: 2023-12-25 13:59:03
+ * @LastEditTime: 2023-12-27 14:56:41
  * @Desc:
  */
 package service
@@ -12,7 +12,6 @@ import (
 	"selfx/config"
 	"selfx/config/service"
 	"selfx/init/captcha"
-	"selfx/utils/timex"
 )
 
 // AdminExists 判断管理员是否存在
@@ -41,39 +40,4 @@ func AdminLogin(username, password, captchaAnswer, captchaID string) (token stri
 
 func AdminCaptcha() (bs64 string, id string) {
 	return captcha.Client.StringSimple(4).Base64()
-}
-
-// AdminUpdate 更新管理员配置
-func AdminUpdate(username, password string, loginExpire timex.Duration) error {
-	if err := config.Config.Admin.Update(username, password, loginExpire); err != nil {
-		return err
-	}
-	config.Config.Admin.ResetJwtKey() // 重置 jwtKey 主动使所有已登录失效
-	return service.Push(config.Config.Admin)
-}
-
-// AdminUsernameUpdate 更新管理员用户名
-func AdminUsernameUpdate(username string) error {
-	if err := config.Config.Admin.UpdateUsername(username); err != nil {
-		return err
-	}
-	config.Config.Admin.ResetJwtKey()
-	return service.Push(config.Config.Admin)
-}
-
-// AdminPasswordUpdate 更新管理员密码
-func AdminPasswordUpdate(password string) error {
-	if err := config.Config.Admin.UpdatePassword(password); err != nil {
-		return err
-	}
-	config.Config.Admin.ResetJwtKey()
-	return service.Push(config.Config.Admin)
-}
-
-// AdminPathUpdate 更新管理路径
-func AdminPathUpdate(path string) error {
-	if err := config.Config.Router.UpdateAdminPath(path); err != nil {
-		return err
-	}
-	return service.Push(config.Config.Router)
 }

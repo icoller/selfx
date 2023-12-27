@@ -2,14 +2,14 @@
  * @Author: coller
  * @Date: 2023-12-20 21:46:14
  * @LastEditors: coller
- * @LastEditTime: 2023-12-25 12:39:37
+ * @LastEditTime: 2023-12-27 12:11:20
  * @Desc:
  */
 package controller
 
 import (
 	"selfx/app/api/mapper"
-	"selfx/app/api/service"
+	apiServ "selfx/app/api/service"
 	"selfx/init/log"
 	"strconv"
 
@@ -30,5 +30,5 @@ func LogRead(ctx *fiber.Ctx) error {
 	if limit == 0 {
 		limit = 100
 	}
-	return ctx.JSON(mapper.ResultData(service.LogRead(ctx.Params("id"), page, limit)))
+	return ctx.JSON(mapper.ResultData(apiServ.LogRead(ctx.Params("id"), page, limit)))
 }

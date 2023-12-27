@@ -11,45 +11,40 @@ import (
 	"time"
 )
 
-// Sitemap 站点地图数据
-var Sitemap = new(sitemap)
-
-type sitemap struct{}
-
 // ArticleList 文章站点地图数据列表
-func (s *sitemap) ArticleList() (res []model.ArticleBase, err error) {
+func SitemapArticleList() (res []model.ArticleBase, err error) {
 	if config.Config.Sitemap.Article.Limit > 0 {
-		res, err = service.Article.ListAfterCreateTime(s.listOption(config.Config.Sitemap.Article))
+		res, err = service.Article.ListAfterCreateTime(SitemaplistOption(config.Config.Sitemap.Article))
 	}
 	return
 }
 
 // CategoryList 分类站点地图数据列表
-func (s *sitemap) CategoryList() (res []model.Category, err error) {
+func SitemapCategoryList() (res []model.Category, err error) {
 	if config.Config.Sitemap.Category.Limit > 0 {
-		res, err = service.Category.ListAfterCreateTime(s.listOption(config.Config.Sitemap.Category))
+		res, err = service.Category.ListAfterCreateTime(SitemaplistOption(config.Config.Sitemap.Category))
 	}
 	return
 }
 
 // TagList 标签站点地图数据列表
-func (s *sitemap) TagList() (res []model.Tag, err error) {
+func SitemapTagList() (res []model.Tag, err error) {
 	if config.Config.Sitemap.Tag.Limit > 0 {
-		res, err = service.Tag.ListAfterCreateTime(s.listOption(config.Config.Sitemap.Tag))
+		res, err = service.Tag.ListAfterCreateTime(SitemaplistOption(config.Config.Sitemap.Tag))
 	}
 	return
 }
 
-func (s *sitemap) listOption(opt *configEntity.SitemapOption) (ctx *context.Context, t int64) {
+func SitemaplistOption(opt *configEntity.SitemapOption) (ctx *context.Context, t int64) {
 	if opt.InHours > 0 {
 		t = time.Now().Unix() - int64(opt.InHours)*60*60
 	}
 	return context.NewContext(opt.Limit, "id desc"), t
 }
 
-func (s *sitemap) ArticleText() (res string, err error) {
+func SitemapArticleText() (res string, err error) {
 	var urls []string
-	items, err := s.ArticleList()
+	items, err := SitemapArticleList()
 	if err != nil {
 		return
 	}
@@ -59,9 +54,9 @@ func (s *sitemap) ArticleText() (res string, err error) {
 	return strings.Join(urls, "\n"), nil
 }
 
-func (s *sitemap) CategoryText() (res string, err error) {
+func SitemapCategoryText() (res string, err error) {
 	var urls []string
-	items, err := s.CategoryList()
+	items, err := SitemapCategoryList()
 	if err != nil {
 		return
 	}
@@ -71,9 +66,9 @@ func (s *sitemap) CategoryText() (res string, err error) {
 	return strings.Join(urls, "\n"), nil
 }
 
-func (s *sitemap) TagText() (res string, err error) {
+func SitemapTagText() (res string, err error) {
 	var urls []string
-	items, err := s.TagList()
+	items, err := SitemapTagList()
 	if err != nil {
 		return
 	}
@@ -83,9 +78,9 @@ func (s *sitemap) TagText() (res string, err error) {
 	return strings.Join(urls, "\n"), nil
 }
 
-func (s *sitemap) ArticleXML() (res string, err error) {
+func SitemapArticleXML() (res string, err error) {
 	var xml = dto.NewSitemapXML()
-	items, err := s.ArticleList()
+	items, err := SitemapArticleList()
 	if err != nil {
 		return
 	}
@@ -95,9 +90,9 @@ func (s *sitemap) ArticleXML() (res string, err error) {
 	return xml.String()
 }
 
-func (s *sitemap) CategoryXML() (res string, err error) {
+func SitemapCategoryXML() (res string, err error) {
 	var xml = dto.NewSitemapXML()
-	items, err := s.CategoryList()
+	items, err := SitemapCategoryList()
 	if err != nil {
 		return
 	}
@@ -107,9 +102,9 @@ func (s *sitemap) CategoryXML() (res string, err error) {
 	return xml.String()
 }
 
-func (s *sitemap) TagXML() (res string, err error) {
+func SitemapTagXML() (res string, err error) {
 	var xml = dto.NewSitemapXML()
-	items, err := s.TagList()
+	items, err := SitemapTagList()
 	if err != nil {
 		return
 	}

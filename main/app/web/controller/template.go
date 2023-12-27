@@ -2,13 +2,13 @@
  * @Author: coller
  * @Date: 2023-12-20 21:46:14
  * @LastEditors: coller
- * @LastEditTime: 2023-12-25 17:51:54
+ * @LastEditTime: 2023-12-27 12:14:12
  * @Desc:
  */
 package controller
 
 import (
-	"selfx/app/web/service"
+	webServ "selfx/app/web/service"
 	"selfx/init/log"
 	"strings"
 
@@ -25,7 +25,7 @@ func TemplatePage(ctx *fiber.Ctx) error {
 	// if path.Ext(_path) == "" {
 	// 	_path = filepath.Join(_path, "index.html")
 	// }
-	b, err := service.Render.TemplatePage(_path)
+	b, err := webServ.RenderTemplatePage(_path)
 	if err != nil {
 		if strings.HasPrefix(err.Error(), "template not found:") {
 			return ctx.Next()

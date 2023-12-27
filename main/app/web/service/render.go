@@ -10,12 +10,7 @@ import (
 	"strconv"
 )
 
-var Render = new(RenderService)
-
-type RenderService struct {
-}
-
-func (r *RenderService) Index() ([]byte, error) {
+func RenderIndex() ([]byte, error) {
 	return template.Render("template/index.html", template.Binds{
 		Page: template.Page{
 			Name:        "index",
@@ -26,7 +21,7 @@ func (r *RenderService) Index() ([]byte, error) {
 	})
 }
 
-func (r *RenderService) TemplatePage(path string) ([]byte, error) {
+func RenderTemplatePage(path string) ([]byte, error) {
 	return template.Render(filepath.Join("page", path), template.Binds{
 		Page: template.Page{
 			Name: "page",
@@ -36,15 +31,15 @@ func (r *RenderService) TemplatePage(path string) ([]byte, error) {
 	})
 }
 
-func (r *RenderService) ArticleBySlug(slug string) (_ []byte, err error) {
+func RenderArticleBySlug(slug string) (_ []byte, err error) {
 	item, err := service.Article.GetBySlug(slug)
 	if err != nil {
 		return
 	}
-	return r.Article(item)
+	return RenderArticle(item)
 }
 
-func (r *RenderService) Article(item *model.Article) (_ []byte, err error) {
+func RenderArticle(item *model.Article) (_ []byte, err error) {
 	if item == nil {
 		err = errors.New("item is nil")
 		return
@@ -60,15 +55,15 @@ func (r *RenderService) Article(item *model.Article) (_ []byte, err error) {
 	})
 }
 
-func (r *RenderService) CategoryBySlug(slug string, page int) (_ []byte, err error) {
+func RenderCategoryBySlug(slug string, page int) (_ []byte, err error) {
 	item, err := service.Category.GetBySlug(slug)
 	if err != nil {
 		return
 	}
-	return r.Category(item, page)
+	return RenderCategory(item, page)
 }
 
-func (r *RenderService) Category(item *model.Category, page int) (_ []byte, err error) {
+func RenderCategory(item *model.Category, page int) (_ []byte, err error) {
 	if item == nil {
 		err = errors.New("item is nil")
 		return
@@ -93,15 +88,15 @@ func (r *RenderService) Category(item *model.Category, page int) (_ []byte, err 
 	})
 }
 
-func (r *RenderService) TagBySlug(slug string, page int) (_ []byte, err error) {
+func RenderTagBySlug(slug string, page int) (_ []byte, err error) {
 	item, err := service.Tag.GetBySlug(slug)
 	if err != nil {
 		return
 	}
-	return r.Tag(item, page)
+	return RenderTag(item, page)
 }
 
-func (r *RenderService) Tag(item *model.Tag, page int) (_ []byte, err error) {
+func RenderTag(item *model.Tag, page int) (_ []byte, err error) {
 	if item == nil {
 		err = errors.New("item is nil")
 		return

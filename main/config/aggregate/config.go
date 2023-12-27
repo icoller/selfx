@@ -2,7 +2,7 @@
  * @Author: coller
  * @Date: 2023-12-25 13:53:45
  * @LastEditors: coller
- * @LastEditTime: 2023-12-25 14:13:52
+ * @LastEditTime: 2023-12-27 14:52:37
  * @Desc:
  */
 package aggregate
@@ -25,6 +25,7 @@ type Config struct {
 	API      *entity.API
 	Sitemap  *entity.Sitemap
 	TLS      *entity.TLS
+	System   *entity.System
 	More     *entity.More
 }
 
@@ -41,6 +42,7 @@ func NewConfig() *Config {
 		API:      entity.NewAPI(),
 		Sitemap:  entity.NewSitemap(),
 		TLS:      entity.NewTLS(),
+		System:   entity.NewSystem(),
 		More:     entity.NewMore(),
 	}
 }
@@ -58,6 +60,7 @@ func (c *Config) Items() []service.Config {
 		c.API,
 		c.Sitemap,
 		c.TLS,
+		c.System,
 		c.More,
 	}
 }

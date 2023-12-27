@@ -1,3 +1,10 @@
+/*
+ * @Author: coller
+ * @Date: 2023-12-25 11:21:04
+ * @LastEditors: coller
+ * @LastEditTime: 2023-12-27 13:05:17
+ * @Desc:
+ */
 package constant
 
 import "errors"
@@ -19,4 +26,11 @@ var (
 	ErrIdAlreadyExists    = errors.New("id already exists")
 	ErrSlugAlreadyExists  = errors.New("slug already exists")
 	ErrTitleAlreadyExists = errors.New("title already exists")
+
+	ErrUsernameRequired = errors.New("username is required")
+
+	ErrEmailAndMobileRequired = errors.New("mobile and email is required")
+
+	ErrEmailRequired  = errors.New("email is required")
+	ErrMobileRequired = errors.New("mobile is required")
 )

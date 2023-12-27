@@ -2,7 +2,7 @@
  * @Author: coller
  * @Date: 2023-12-20 21:46:14
  * @LastEditors: coller
- * @LastEditTime: 2023-12-25 17:54:18
+ * @LastEditTime: 2023-12-27 12:14:26
  * @Desc:
  */
 package plugins
@@ -68,7 +68,7 @@ func (d *PreBuildArticleCache) build(item *model.Article, action string) {
 		return
 	}
 
-	bytes, err := webServ.Render.Article(item)
+	bytes, err := webServ.RenderArticle(item)
 	if err != nil {
 		d.ctx.Log.Error("render error", zap.Error(err), zap.Int("id", item.ID))
 		return

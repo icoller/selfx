@@ -2,7 +2,7 @@
  * @Author: coller
  * @Date: 2023-12-25 11:18:12
  * @LastEditors: coller
- * @LastEditTime: 2023-12-25 11:22:10
+ * @LastEditTime: 2023-12-27 13:09:34
  * @Desc: 常量
  */
 package constant
@@ -20,6 +20,7 @@ const (
 	UploadDir        = "./public/upload"
 	UploadDomain     = "/upload/"
 	LogoFilePath     = "/logo.png"
+	DefaultSaltLen   = 6 // HASH默认长度
 )
 
 var (

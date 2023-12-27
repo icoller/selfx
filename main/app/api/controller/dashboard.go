@@ -2,7 +2,7 @@
  * @Author: coller
  * @Date: 2023-12-20 21:46:14
  * @LastEditors: coller
- * @LastEditTime: 2023-12-25 15:18:54
+ * @LastEditTime: 2023-12-27 12:11:09
  * @Desc:
  */
 package controller
@@ -10,7 +10,7 @@ package controller
 import (
 	"errors"
 	"selfx/app/api/mapper"
-	appService "selfx/app/api/service"
+	apiServ "selfx/app/api/service"
 	"selfx/app/service"
 	"selfx/init/db"
 	"time"
@@ -27,25 +27,25 @@ func (d *dashboard) Controller(ctx *fiber.Ctx) (err error) {
 	var data any
 	switch ctx.Params("id") {
 	case "systemLoad":
-		data = appService.SystemLoadPercent()
+		data = apiServ.SystemLoadPercent()
 	case "systemCPU":
-		data, err = appService.SystemCPUPercent(time.Second)
+		data, err = apiServ.SystemCPUPercent(time.Second)
 	case "systemMemory":
-		data, err = appService.SystemMemoryPercent()
+		data, err = apiServ.SystemMemoryPercent()
 	case "systemDisk":
-		data, err = appService.SystemDiskPercents()
+		data, err = apiServ.SystemDiskPercents()
 	case "appCPU":
-		data, err = appService.AppCPUPercent()
+		data, err = apiServ.AppCPUPercent()
 	case "appMemory":
-		data, err = appService.AppUsedMemory()
+		data, err = apiServ.AppUsedMemory()
 	case "appInfo":
-		data = appService.AppInfo()
+		data = apiServ.AppInfo()
 	case "database":
 		data = db.GetSize()
 	case "log":
-		data, err = appService.LogDirSize()
+		data, err = apiServ.LogDirSize()
 	case "cache":
-		data, err = appService.CacheSize()
+		data, err = apiServ.CacheSize()
 	case "articleTotal":
 		data, err = service.Article.CountTotal()
 	case "articleToday":

@@ -2,7 +2,7 @@ package controller
 
 import (
 	"selfx/app/api/mapper"
-	apiService "selfx/app/api/service"
+	apiServ "selfx/app/api/service"
 	"selfx/app/model"
 	"selfx/app/service"
 
@@ -38,7 +38,7 @@ func ArticleCreate(ctx *fiber.Ctx) error {
 	if err != nil {
 		return ctx.JSON(mapper.Result(err))
 	}
-	return ctx.JSON(mapper.ResultData(obj, apiService.ArticlePost("create", obj)))
+	return ctx.JSON(mapper.ResultData(obj, apiServ.ArticlePost("create", obj)))
 }
 
 func ArticleUpdate(ctx *fiber.Ctx) error {
@@ -46,7 +46,7 @@ func ArticleUpdate(ctx *fiber.Ctx) error {
 	if err != nil {
 		return ctx.JSON(mapper.Result(err))
 	}
-	return ctx.JSON(mapper.ResultData(obj, apiService.ArticlePost("update", obj)))
+	return ctx.JSON(mapper.ResultData(obj, apiServ.ArticlePost("update", obj)))
 }
 
 func ArticleDelete(ctx *fiber.Ctx) error {
@@ -54,7 +54,7 @@ func ArticleDelete(ctx *fiber.Ctx) error {
 	if err != nil {
 		return ctx.JSON(mapper.Result(err))
 	}
-	return ctx.JSON(mapper.Result(apiService.DeleteArticle(id)))
+	return ctx.JSON(mapper.Result(apiServ.DeleteArticle(id)))
 }
 
 func ArticleBatchDelete(ctx *fiber.Ctx) error {
@@ -62,7 +62,7 @@ func ArticleBatchDelete(ctx *fiber.Ctx) error {
 	if err != nil {
 		return ctx.JSON(mapper.Result(err))
 	}
-	return ctx.JSON(mapper.Result(apiService.BatchDeleteArticle(ids)))
+	return ctx.JSON(mapper.Result(apiServ.BatchDeleteArticle(ids)))
 }
 
 func ArticleExistsSlug(ctx *fiber.Ctx) error {
@@ -87,7 +87,7 @@ func ArticleCreateTag(ctx *fiber.Ctx) error {
 	if err != nil {
 		return ctx.JSON(mapper.Result(err))
 	}
-	return ctx.JSON(mapper.Result(apiService.CreateArticleTagByName(id, string(ctx.Body()))))
+	return ctx.JSON(mapper.Result(apiServ.CreateArticleTagByName(id, string(ctx.Body()))))
 }
 
 // ArticleCreateTagByNameList 创建文章标签通过name列表
@@ -100,7 +100,7 @@ func ArticleCreateTagByNameList(ctx *fiber.Ctx) error {
 	if err != nil {
 		return ctx.JSON(mapper.Result(err))
 	}
-	return ctx.JSON(mapper.Result(apiService.CreateArticleTagsByNameList(id, tagNameList)))
+	return ctx.JSON(mapper.Result(apiServ.CreateArticleTagsByNameList(id, tagNameList)))
 }
 
 // ArticleDeleteTagByName 删除文章标签
@@ -109,7 +109,7 @@ func ArticleDeleteTagByName(ctx *fiber.Ctx) error {
 	if err != nil {
 		return ctx.JSON(mapper.Result(err))
 	}
-	return ctx.JSON(mapper.Result(apiService.DeleteArticleTagByName(id, string(ctx.Body()))))
+	return ctx.JSON(mapper.Result(apiServ.DeleteArticleTagByName(id, string(ctx.Body()))))
 }
 
 // ArticleDeleteTagByIds 删除文章标签
@@ -122,7 +122,7 @@ func ArticleDeleteTagByIds(ctx *fiber.Ctx) error {
 	if err != nil {
 		return ctx.JSON(mapper.Result(err))
 	}
-	return ctx.JSON(mapper.Result(apiService.DeleteArticleTagByIds(id, tagIds)))
+	return ctx.JSON(mapper.Result(apiServ.DeleteArticleTagByIds(id, tagIds)))
 }
 
 // ArticleBatchSetCategory 文章批量设置分类

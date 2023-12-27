@@ -8,16 +8,9 @@
 package controller
 
 import (
-	"selfx/app/api/mapper"
-	"selfx/app/api/service"
-
 	"github.com/gofiber/fiber/v2"
 )
 
 func CommentAdd(ctx *fiber.Ctx) error {
-	obj, err := mapper.Config.BodyToAdminInit(ctx.Body())
-	if err != nil {
-		return ctx.JSON(mapper.Result(err))
-	}
-	return ctx.JSON(mapper.Result(service.AdminCreate(obj.Username, obj.Password)))
+	return nil
 }

@@ -2,28 +2,45 @@
  * @Author: coller
  * @Date: 2023-12-25 12:30:40
  * @LastEditors: coller
- * @LastEditTime: 2023-12-26 17:51:56
+ * @LastEditTime: 2023-12-27 15:36:17
  * @Desc: 管理元
  */
 package controller
 
 import (
+	"selfx/app/api/dto"
 	"selfx/app/api/mapper"
-	"selfx/app/api/service"
+	apiServ "selfx/app/api/service"
+	"selfx/app/model"
+	"selfx/app/service"
 	"selfx/constant"
-	"time"
+	"selfx/init/ip2region"
+	"selfx/utils/agent"
 
 	"github.com/gofiber/fiber/v2"
 )
 
 // 注册用户
-func UserRegister(ctx *fiber.Ctx) error {
-	if time.Since(constant.AppStartTime).Minutes() > 10 {
-		return ctx.JSON(mapper.Fail("please restart the application to create an administrator within 10 minutes"))
-	}
-	obj, err := mapper.Config.BodyToAdminInit(ctx.Body())
+func UserRegister(c *fiber.Ctx) error {
+	req, err := mapper.BodyToModelCheck[dto.UserRegister](c.Body())
 	if err != nil {
-		return ctx.JSON(mapper.Result(err))
+		return c.JSON(mapper.Result(err))
 	}
-	return ctx.JSON(mapper.Result(service.AdminCreate(obj.Username, obj.Password)))
+	if err := service.Verify.CheckUsernameCode(req.Username, req.Code, constant.VerifyTypeIdRegister); err != nil {
+		return c.JSON(mapper.Result(err))
+	}
+	// // 走注册流程
+	user, err := apiServ.UserRegisterAccount(req)
+	if err != nil {
+		return c.JSON(mapper.Result(err))
+	}
+	var loginReq dto.UserLogin
+	ip := agent.GetIp(c)
+	userInfo, err := apiServ.UserLoginAccount(&dto.UserLogin{Ip: ip, Username: req.Username, Password: req.Password, Mode: constant.UserModeRegister})
+	if err != nil {
+		return c.JSON(mapper.Result(err))
+	}
+	userAgent := string(c.Context().UserAgent())
+	service.Login.RecordCreate(&model.LoginRecord{UserId: user.ID, Ip: loginReq.Ip, Mode: req.Mode, Region: ip2region.Region(ip), Browser: agent.GetBrowser(userAgent), Os: agent.GetOs(userAgent), Remark: userAgent})
+	return c.JSON(mapper.ResultData(userInfo, nil))
 }

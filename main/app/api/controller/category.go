@@ -2,14 +2,14 @@
  * @Author: coller
  * @Date: 2023-12-20 21:46:14
  * @LastEditors: coller
- * @LastEditTime: 2023-12-25 12:39:15
- * @Desc:
+ * @LastEditTime: 2023-12-27 12:09:25
+ * @Desc: 分类
  */
 package controller
 
 import (
 	"selfx/app/api/mapper"
-	appService "selfx/app/api/service"
+	apiServ "selfx/app/api/service"
 	"selfx/app/model"
 	"selfx/app/service"
 
@@ -81,7 +81,7 @@ func CategoryExistsName(ctx *fiber.Ctx) error {
 }
 
 func CategoryTree(ctx *fiber.Ctx) error {
-	return ctx.JSON(mapper.ResultData(appService.CategoryTree()))
+	return ctx.JSON(mapper.ResultData(apiServ.CategoryTree()))
 }
 
 func CategoryBatchSetParentCategory(ctx *fiber.Ctx) error {

@@ -2,7 +2,7 @@ package controller
 
 import (
 	"selfx/app/api/mapper"
-	appService "selfx/app/api/service"
+	apiServ "selfx/app/api/service"
 	"selfx/app/plugin/service"
 	"strconv"
 
@@ -10,7 +10,7 @@ import (
 )
 
 func PluginList(ctx *fiber.Ctx) error {
-	return ctx.JSON(mapper.ResultData(appService.PluginList(), nil))
+	return ctx.JSON(mapper.ResultData(apiServ.PluginList(), nil))
 }
 
 func PluginOptions(ctx *fiber.Ctx) error {
@@ -40,5 +40,5 @@ func PluginUpdateCronExp(ctx *fiber.Ctx) error {
 func PluginLogList(ctx *fiber.Ctx) error {
 	page, _ := strconv.Atoi(ctx.Query("page", "1"))
 	limit, _ := strconv.Atoi(ctx.Query("limit", "100"))
-	return ctx.JSON(mapper.ResultData(appService.PluginLogList(ctx.Params("id"), page, limit)))
+	return ctx.JSON(mapper.ResultData(apiServ.PluginLogList(ctx.Params("id"), page, limit)))
 }

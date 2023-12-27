@@ -7,6 +7,7 @@ import (
 	"selfx/app/plugin/factory"
 	"selfx/app/plugin/repo"
 	"selfx/constant"
+	"selfx/init/log"
 	"selfx/utils"
 	"time"
 
@@ -18,6 +19,16 @@ var Plugin = NewPluginService()
 type PluginService struct {
 	Items []*entity.Plugin
 	Cron  *cron.Cron
+}
+
+func PluginInit(items ...entity.PluginEntry) {
+	for _, item := range items {
+		if err := Plugin.Init(item); err != nil {
+			log.Error("plugin loaded failed", log.Any("info", item.Info()), log.Err(err))
+		} else {
+			log.Debug("plugin loaded successfully", log.Any("info", item.Info()))
+		}
+	}
 }
 
 func NewPluginService() *PluginService {

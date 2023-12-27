@@ -7,10 +7,6 @@ import (
 	"selfx/init/db"
 )
 
-func init() {
-
-}
-
 var Tag = new(TagRepo)
 
 type TagRepo struct {

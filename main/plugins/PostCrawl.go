@@ -2,7 +2,7 @@ package plugins
 
 import (
 	"fmt"
-	appService "selfx/app/api/service"
+	apiServ "selfx/app/api/service"
 	"selfx/app/model"
 	pluginEntity "selfx/app/plugin/entity"
 	"selfx/app/repo/context"
@@ -77,7 +77,7 @@ func (p *PostCrawl) Run(ctx *pluginEntity.Plugin) (err error) {
 
 func (p *PostCrawl) post(id int, wg *sync.WaitGroup, success *int) {
 	defer wg.Done()
-	item, err := appService.CrawlPost(id)
+	item, err := apiServ.CrawlPost(id)
 	if err != nil {
 		p.ctx.Log.Error("post error", zap.Error(err), zap.Int("id", id))
 		if p.DeleteOnFailure {

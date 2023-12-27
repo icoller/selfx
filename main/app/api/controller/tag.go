@@ -2,14 +2,14 @@
  * @Author: coller
  * @Date: 2023-12-20 21:46:14
  * @LastEditors: coller
- * @LastEditTime: 2023-12-25 12:39:53
- * @Desc:
+ * @LastEditTime: 2023-12-27 12:12:19
+ * @Desc: tag
  */
 package controller
 
 import (
 	"selfx/app/api/mapper"
-	appService "selfx/app/api/service"
+	apiServ "selfx/app/api/service"
 	"selfx/app/model"
 	"selfx/app/service"
 
@@ -61,7 +61,7 @@ func TagDelete(ctx *fiber.Ctx) error {
 	if err != nil {
 		return ctx.JSON(mapper.Result(err))
 	}
-	return ctx.JSON(mapper.Result(appService.DeleteTag(id)))
+	return ctx.JSON(mapper.Result(apiServ.DeleteTag(id)))
 }
 
 func TagBatchDelete(ctx *fiber.Ctx) error {
@@ -69,7 +69,7 @@ func TagBatchDelete(ctx *fiber.Ctx) error {
 	if err != nil {
 		return ctx.JSON(mapper.Result(err))
 	}
-	return ctx.JSON(mapper.Result(appService.BatchDeleteTag(ids)))
+	return ctx.JSON(mapper.Result(apiServ.BatchDeleteTag(ids)))
 }
 
 func TagExistsSlug(ctx *fiber.Ctx) error {

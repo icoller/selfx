@@ -1,3 +1,10 @@
+/*
+ * @Author: coller
+ * @Date: 2023-12-25 13:53:45
+ * @LastEditors: coller
+ * @LastEditTime: 2023-12-27 14:43:48
+ * @Desc:
+ */
 package entity
 
 type More struct {
