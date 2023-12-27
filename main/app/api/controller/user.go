@@ -2,7 +2,7 @@
  * @Author: coller
  * @Date: 2023-12-25 12:30:40
  * @LastEditors: coller
- * @LastEditTime: 2023-12-27 15:36:17
+ * @LastEditTime: 2023-12-27 15:49:41
  * @Desc: 管理元
  */
 package controller
@@ -30,13 +30,13 @@ func UserRegister(c *fiber.Ctx) error {
 		return c.JSON(mapper.Result(err))
 	}
 	// // 走注册流程
-	user, err := apiServ.UserRegisterAccount(req)
+	user, err := apiServ.UserRegister(req)
 	if err != nil {
 		return c.JSON(mapper.Result(err))
 	}
 	var loginReq dto.UserLogin
 	ip := agent.GetIp(c)
-	userInfo, err := apiServ.UserLoginAccount(&dto.UserLogin{Ip: ip, Username: req.Username, Password: req.Password, Mode: constant.UserModeRegister})
+	userInfo, err := apiServ.UserLogin(&dto.UserLogin{Ip: ip, Username: req.Username, Password: req.Password, Mode: constant.UserModeRegister})
 	if err != nil {
 		return c.JSON(mapper.Result(err))
 	}

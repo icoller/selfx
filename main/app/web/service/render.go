@@ -14,9 +14,9 @@ func RenderIndex() ([]byte, error) {
 	return template.Render("template/index.html", template.Binds{
 		Page: template.Page{
 			Name:        "index",
-			Title:       config.Config.Site.Title,
-			Keywords:    config.Config.Site.Keywords,
-			Description: config.Config.Site.Description,
+			Title:       config.Set.Site.Title,
+			Keywords:    config.Set.Site.Keywords,
+			Description: config.Set.Site.Description,
 		},
 	})
 }
@@ -47,7 +47,7 @@ func RenderArticle(item *model.Article) (_ []byte, err error) {
 	return template.Render("template/article.html", template.Binds{
 		Page: template.Page{
 			Name:        "article",
-			Title:       item.Title + " - " + config.Config.Site.Name,
+			Title:       item.Title + " - " + config.Set.Site.Name,
 			Keywords:    item.Keywords,
 			Description: item.Description,
 		},
@@ -79,7 +79,7 @@ func RenderCategory(item *model.Category, page int) (_ []byte, err error) {
 	return template.Render("template/category.html", template.Binds{
 		Page: template.Page{
 			Name:        "category",
-			Title:       title + pageTitle + " - " + config.Config.Site.Name,
+			Title:       title + pageTitle + " - " + config.Set.Site.Name,
 			Keywords:    item.Keywords,
 			Description: item.Description,
 			PageNumber:  page,
@@ -112,7 +112,7 @@ func RenderTag(item *model.Tag, page int) (_ []byte, err error) {
 	return template.Render("template/tag.html", template.Binds{
 		Page: template.Page{
 			Name:        "tag",
-			Title:       title + pageTitle + " - " + config.Config.Site.Name,
+			Title:       title + pageTitle + " - " + config.Set.Site.Name,
 			Keywords:    item.Keywords,
 			Description: item.Description,
 			PageNumber:  page,

@@ -2,7 +2,7 @@
  * @Author: coller
  * @Date: 2023-12-20 21:46:14
  * @LastEditors: coller
- * @LastEditTime: 2023-12-27 12:07:47
+ * @LastEditTime: 2023-12-27 17:14:20
  * @Desc:
  */
 package service
@@ -22,7 +22,7 @@ func LogDirSize() (uint64, error) {
 }
 
 func LogRead(id string, page, limit int) (any, error) {
-	handle := config.Config.Log.GetByID(id)
+	handle := config.Set.Log.GetByID(id)
 	if handle == nil {
 		return nil, errors.New("log id not found")
 	}

@@ -13,24 +13,24 @@ import (
 
 // ArticleList 文章站点地图数据列表
 func SitemapArticleList() (res []model.ArticleBase, err error) {
-	if config.Config.Sitemap.Article.Limit > 0 {
-		res, err = service.Article.ListAfterCreateTime(SitemaplistOption(config.Config.Sitemap.Article))
+	if config.Set.Sitemap.Article.Limit > 0 {
+		res, err = service.Article.ListAfterCreateTime(SitemaplistOption(config.Set.Sitemap.Article))
 	}
 	return
 }
 
 // CategoryList 分类站点地图数据列表
 func SitemapCategoryList() (res []model.Category, err error) {
-	if config.Config.Sitemap.Category.Limit > 0 {
-		res, err = service.Category.ListAfterCreateTime(SitemaplistOption(config.Config.Sitemap.Category))
+	if config.Set.Sitemap.Category.Limit > 0 {
+		res, err = service.Category.ListAfterCreateTime(SitemaplistOption(config.Set.Sitemap.Category))
 	}
 	return
 }
 
 // TagList 标签站点地图数据列表
 func SitemapTagList() (res []model.Tag, err error) {
-	if config.Config.Sitemap.Tag.Limit > 0 {
-		res, err = service.Tag.ListAfterCreateTime(SitemaplistOption(config.Config.Sitemap.Tag))
+	if config.Set.Sitemap.Tag.Limit > 0 {
+		res, err = service.Tag.ListAfterCreateTime(SitemaplistOption(config.Set.Sitemap.Tag))
 	}
 	return
 }
@@ -85,7 +85,7 @@ func SitemapArticleXML() (res string, err error) {
 		return
 	}
 	for _, item := range items {
-		xml.URL = append(xml.URL, dto.NewSitemapURL(item.FullURL(), item.CreateTime, config.Config.Sitemap.Article.ChangeFreq, config.Config.Sitemap.Article.Priority))
+		xml.URL = append(xml.URL, dto.NewSitemapURL(item.FullURL(), item.CreateTime, config.Set.Sitemap.Article.ChangeFreq, config.Set.Sitemap.Article.Priority))
 	}
 	return xml.String()
 }
@@ -97,7 +97,7 @@ func SitemapCategoryXML() (res string, err error) {
 		return
 	}
 	for _, item := range items {
-		xml.URL = append(xml.URL, dto.NewSitemapURL(item.FullURL(), item.CreateTime, config.Config.Sitemap.Category.ChangeFreq, config.Config.Sitemap.Category.Priority))
+		xml.URL = append(xml.URL, dto.NewSitemapURL(item.FullURL(), item.CreateTime, config.Set.Sitemap.Category.ChangeFreq, config.Set.Sitemap.Category.Priority))
 	}
 	return xml.String()
 }
@@ -109,7 +109,7 @@ func SitemapTagXML() (res string, err error) {
 		return
 	}
 	for _, item := range items {
-		xml.URL = append(xml.URL, dto.NewSitemapURL(item.FullURL(), item.CreateTime, config.Config.Sitemap.Tag.ChangeFreq, config.Config.Sitemap.Tag.Priority))
+		xml.URL = append(xml.URL, dto.NewSitemapURL(item.FullURL(), item.CreateTime, config.Set.Sitemap.Tag.ChangeFreq, config.Set.Sitemap.Tag.Priority))
 	}
 	return xml.String()
 }

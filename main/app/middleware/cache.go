@@ -17,13 +17,13 @@ import (
 
 func Cache(ctx *fiber.Ctx) error {
 
-	if !config.Config.Cache.Enable || ctx.Method() != "GET" {
+	if !config.Set.Cache.Enable || ctx.Method() != "GET" {
 		return ctx.Next()
 	}
 
 	name := ctx.Route().Name
 	key := ctx.Path()
-	option := config.Config.Cache.GetOption(name)
+	option := config.Set.Cache.GetOption(name)
 
 	if option == nil || !option.Enable {
 		return ctx.Next()

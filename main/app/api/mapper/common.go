@@ -2,7 +2,7 @@
  * @Author: coller
  * @Date: 2023-12-20 21:46:14
  * @LastEditors: coller
- * @LastEditTime: 2023-12-27 10:16:29
+ * @LastEditTime: 2023-12-27 23:22:16
  * @Desc: 映射
  */
 package mapper
@@ -10,12 +10,14 @@ package mapper
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"reflect"
 	"selfx/app/api/dto"
 	"selfx/app/model"
 	"selfx/app/repo/context"
+	"selfx/app/service"
 	"selfx/config"
-	"selfx/global"
+	"selfx/utils"
 
 	"github.com/go-playground/validator/v10"
 )
@@ -51,7 +53,7 @@ func BodyToContext(body []byte) (ctx context.Context, err error) {
 		return
 	}
 	err = BodyParser(body, &ctx)
-	ctx.FastOffset = config.Config.More.FastOffsetMinPage > 0 && ctx.Page > config.Config.More.FastOffsetMinPage // 加速分页查询
+	ctx.FastOffset = config.Set.More.FastOffsetMinPage > 0 && ctx.Page > config.Set.More.FastOffsetMinPage // 加速分页查询
 	if ctx.Limit == 0 {
 		ctx.Limit = 20 // 限制调取数量
 	}
@@ -88,11 +90,22 @@ func BodyToIntSet(body []byte) (res []int, err error) {
 
 func BodyToModelCheck[M any](body []byte) (_ *M, err error) {
 	var obj M
+	ref := reflect.TypeOf(&obj).Elem()
 	if err = BodyParser(body, &obj); err != nil {
 		return nil, errors.New("数据解析错误")
 	}
-	ref := reflect.TypeOf(obj).Elem()
-	if err := global.VALID.Struct(obj); err != nil {
+
+	code := utils.RandInt(1000, 9999)
+	err = service.Verify.Create(&model.Verify{
+		Username: "coller@139.com",
+		Code:     code,
+		TypeId:   10,
+		IP:       "192.168.1.1",
+	})
+
+	fmt.Println(err, "err")
+
+	if err := validator.New().Struct(&obj); err != nil {
 		// 如果是输入参数无效，则直接返回输入参数错误
 		invalid, ok := err.(*validator.InvalidValidationError)
 		if ok {

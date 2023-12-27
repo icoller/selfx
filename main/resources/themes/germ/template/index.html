@@ -1,9 +1,13 @@
 {{extends "./layout/layout.html"}}
 {{import "./component/article_list.html"}}
-
 {{block main()}}
+    <main class="col-span-full lg:col-span-11 xl:col-span-12">
     {{ include "./widget/carousel.html" }}
     <div class="">
         {{yield article_list(list=Widget.IndexList())}}
     </div>
+    </main>
+    <aside class="col-span-full lg:col-span-5 xl:col-span-4">
+        {{ include "./layout/aside.html" }}
+    </aside>
 {{end}}

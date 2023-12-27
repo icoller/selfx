@@ -25,7 +25,7 @@ func CacheInit(ctx *fiber.Ctx) error {
 func CacheClear(ctx *fiber.Ctx) error {
 	name := ctx.Params("name")
 	// 执行之前，先查询一下是否存在设置的前缀，防止提交其他目录字符串导致安全问题
-	if opt := config.Config.Cache.GetOption(name); opt == nil {
+	if opt := config.Set.Cache.GetOption(name); opt == nil {
 		return ctx.JSON(mapper.Fail("option not found"))
 	}
 	err := cache.ClearBucket(name)

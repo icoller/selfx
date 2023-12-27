@@ -22,8 +22,8 @@ func init() {
 }
 
 func Init() error {
-	config.Config.Upload.Storage.CloseAll() // 先全部关闭
-	d, err := config.Config.Upload.Storage.ActiveDriver()
+	config.Set.Upload.Storage.CloseAll() // 先全部关闭
+	d, err := config.Set.Upload.Storage.ActiveDriver()
 	if err != nil {
 		return err
 	}
@@ -32,7 +32,7 @@ func Init() error {
 
 func Upload(key, defaultExt string, val *storage.SetValue) (res *Result, err error) {
 	res = NewResult(key, defaultExt)
-	store, err := config.Config.Upload.Storage.ActiveDriver()
+	store, err := config.Set.Upload.Storage.ActiveDriver()
 	if err != nil {
 		return
 	}
@@ -69,7 +69,7 @@ func NewResult(key, defaultExt string) *Result {
 		r.Ext = "." + r.Ext
 	}
 	// dir
-	switch config.Config.Upload.PathFormat {
+	switch config.Set.Upload.PathFormat {
 	case "date":
 		r.Dir = time.Now().Format("20060102")
 	case "hashDate":
@@ -81,7 +81,7 @@ func NewResult(key, defaultExt string) *Result {
 		r.Dir = r.RawDir
 	}
 	// name
-	switch config.Config.Upload.NameFormat {
+	switch config.Set.Upload.NameFormat {
 	case "md5":
 		r.Name = r.md5(r.RawName)
 	case "uuid":
@@ -96,7 +96,7 @@ func NewResult(key, defaultExt string) *Result {
 	r.FullPath = filepath.ToSlash(r.FullPath)
 	r.FullPath = strings.TrimPrefix(r.FullPath, "/") // 去掉开头的斜杠，防止对象存储无法识别目录，而存成一个整体的Key
 	// url
-	r.URL = config.Config.Upload.GetDomain() + r.FullPath
+	r.URL = config.Set.Upload.GetDomain() + r.FullPath
 	return r
 }
 

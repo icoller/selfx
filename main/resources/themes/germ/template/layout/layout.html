@@ -1,3 +1,10 @@
+<!--
+ * @Author: coller
+ * @Date: 2023-12-20 23:33:55
+ * @LastEditors: coller
+ * @LastEditTime: 2023-12-27 18:05:39
+ * @Desc:  
+-->
 <!DOCTYPE html>
 <html x-data="data($refs)" x-init="init($data)" :class="{ 'dark': dark }">
   <head>
@@ -21,13 +28,16 @@
   </head>
   <body :class="{'h-screen overflow-hidden':showDrawer}" x-cloak>
     {{ include "./header.html" }}
-    <div class="container grid gap-4 mt-3 mb-3 grid-cols-16">
-      <main class="col-span-full lg:col-span-11  xl:col-span-12">
+    <!-- <div class="container grid gap-4 mt-3 mb-3 grid-cols-16">
+      <main class="col-span-full lg:col-span-11 xl:col-span-12">
         {{yield main()}}
       </main>
-      <aside class="col-span-full lg:col-span-5  xl:col-span-4">
+      <aside class="col-span-full lg:col-span-5 xl:col-span-4">
         {{ include "./aside.html" }}
       </aside>
+    </div> -->
+    <div class="container grid gap-4 mt-3 mb-3 grid-cols-16">
+      {{yield main()}}
     </div>
     <footer class="container py-3 text-center text-sm text-gray-400">
       {{ Config.Template.Footer | raw }} Theme by Coller

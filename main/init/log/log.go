@@ -28,11 +28,11 @@ var (
 )
 
 var (
-	App     = core.New(config.Config.Log.App)
-	SQL     = core.New(config.Config.Log.SQL)
-	SlowSQL = core.New(config.Config.Log.SlowSQL)
-	Visitor = core.New(config.Config.Log.Visitor)
-	Spider  = core.New(config.Config.Log.Spider)
+	App     = core.New(config.Set.Log.App)
+	SQL     = core.New(config.Set.Log.SQL)
+	SlowSQL = core.New(config.Set.Log.SlowSQL)
+	Visitor = core.New(config.Set.Log.Visitor)
+	Spider  = core.New(config.Set.Log.Spider)
 )
 
 func init() {

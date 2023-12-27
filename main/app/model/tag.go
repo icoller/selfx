@@ -18,23 +18,23 @@ type Tag struct {
 }
 
 func (t *Tag) FullURL() string {
-	return config.Config.Site.GetURL() + t.URL()
+	return config.Set.Site.GetURL() + t.URL()
 }
 
 func (t *Tag) URL() string {
-	return strings.Replace(config.Config.Router.GetTagRule(), ":slug", t.Slug, 1)
+	return strings.Replace(config.Set.Router.GetTagRule(), ":slug", t.Slug, 1)
 }
 
 func (t *Tag) PageURL(page int) string {
 	if page < 2 {
 		return t.URL()
 	}
-	res := strings.Replace(config.Config.Router.GetTagPageRule(), ":slug", t.Slug, 1)
+	res := strings.Replace(config.Set.Router.GetTagPageRule(), ":slug", t.Slug, 1)
 	return strings.Replace(res, ":page<int>", strconv.Itoa(page), 1)
 }
 
 func (t *Tag) FullPageURL(page int) string {
-	return config.Config.Site.GetURL() + t.PageURL(page)
+	return config.Set.Site.GetURL() + t.PageURL(page)
 }
 
 func (t *Tag) CreateTimeFormat(layouts ...string) string {

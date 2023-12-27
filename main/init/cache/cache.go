@@ -23,10 +23,10 @@ func init() {
 
 func Init() error {
 	// close all
-	for _, item := range config.Config.Cache.Driver.Items() {
+	for _, item := range config.Set.Cache.Driver.Items() {
 		_ = item.Close()
 	}
-	if !config.Config.Cache.Enable {
+	if !config.Set.Cache.Enable {
 		return nil
 	}
 	d, err := ActiveDriver()
@@ -37,10 +37,10 @@ func Init() error {
 }
 
 func ActiveDriver() (res core.Cache, err error) {
-	if !config.Config.Cache.Enable {
+	if !config.Set.Cache.Enable {
 		return nil, errors.New("cache is disabled")
 	}
-	res, err = config.Config.Cache.Driver.Get(config.Config.Cache.ActiveDriver)
+	res, err = config.Set.Cache.Driver.Get(config.Set.Cache.ActiveDriver)
 	if res == nil {
 		return nil, errors.New("active driver is nil")
 	}

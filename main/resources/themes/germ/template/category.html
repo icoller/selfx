@@ -3,6 +3,7 @@
 {{import "./component/pagination.html" }}
 {{import "./component/breadcrumb.html" }}
 {{block main()}}
+    <main class="col-span-full lg:col-span-11 xl:col-span-12">
     {{ sub := Category().Children(Data.ID)}}
     {{ res:= Widget.CategoryPageList(Data.ID, Page.PageNumber)}}
     <div>
@@ -31,7 +32,10 @@
     {{ if res.Count ==0 }}
         {{yield categoryChildrenList()}}
     {{ end }}
-
+    </main>
+    <aside class="col-span-full lg:col-span-5 xl:col-span-4">
+        {{ include "./layout/aside.html" }}
+    </aside>
 {{end}}
 {{block categoryChildrenList()}}
     {{ range i, s := sub }}

@@ -29,7 +29,7 @@ var minifyCodeHandle *minify.M
 
 func MinifyCode(ctx *fiber.Ctx) error {
 	next := ctx.Next()
-	if !config.Config.Router.MinifyCode || next != nil || minifyCodeHandle == nil {
+	if !config.Set.Router.MinifyCode || next != nil || minifyCodeHandle == nil {
 		return next
 	}
 	body := ctx.Response().Body()

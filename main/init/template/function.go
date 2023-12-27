@@ -38,12 +38,12 @@ type configHandle struct {
 
 func newConfigHandle() *configHandle {
 	return &configHandle{
-		Site:     config.Config.Site,
-		Router:   config.Config.Router,
-		Upload:   config.Config.Upload,
-		Cache:    config.Config.Cache,
-		Theme:    config.Config.Theme,
-		Template: config.Config.Template,
-		Sitemap:  config.Config.Sitemap,
+		Site:     config.Set.Site,
+		Router:   config.Set.Router,
+		Upload:   config.Set.Upload,
+		Cache:    config.Set.Cache,
+		Theme:    config.Set.Theme,
+		Template: config.Set.Template,
+		Sitemap:  config.Set.Sitemap,
 	}
 }

@@ -26,10 +26,10 @@ func newLog() *log {
 
 func (l *log) initPool() {
 	var err error
-	if l.httpPool, err = ants.NewPoolWithFunc(config.Config.Log.HttpPoolSize, l.poolWriteHTTP, ants.WithNonblocking(true)); err != nil {
+	if l.httpPool, err = ants.NewPoolWithFunc(config.Set.Log.HttpPoolSize, l.poolWriteHTTP, ants.WithNonblocking(true)); err != nil {
 		Warn("http log pool initialization error", Err(err))
 	}
-	if l.sqlPool, err = ants.NewPoolWithFunc(config.Config.Log.SqlPoolSize, l.poolWriteSQL, ants.WithNonblocking(true)); err != nil {
+	if l.sqlPool, err = ants.NewPoolWithFunc(config.Set.Log.SqlPoolSize, l.poolWriteSQL, ants.WithNonblocking(true)); err != nil {
 		Warn("sql log pool initialization error", Err(err))
 	}
 }
@@ -96,7 +96,7 @@ func (l *log) HTTP(entry HttpData) {
 		return
 	}
 	// 如果是后台路径,则不打印 headers
-	if strings.HasPrefix(entry.Path, config.Config.Router.GetAdminPath()) {
+	if strings.HasPrefix(entry.Path, config.Set.Router.GetAdminPath()) {
 		entry.Headers = ""
 	}
 	client.Info("",
@@ -118,7 +118,7 @@ func (l *log) spiderFeature(ua string) string {
 	if len(ua) == 0 {
 		return "unknown"
 	}
-	for _, v := range config.Config.Log.SpiderFeature {
+	for _, v := range config.Set.Log.SpiderFeature {
 		if strings.Contains(strings.ToLower(ua), strings.ToLower(v)) {
 			return v
 		}
@@ -138,7 +138,7 @@ func (l *log) SQL(entry SqlData) {
 	take := float64(time.Since(entry.BeginTime).Nanoseconds()) / 1e6 // 毫秒
 	path := entry.File + ":" + strconv.Itoa(entry.Line)
 	client := SQL
-	if take >= float64(config.Config.Log.SlowSQLThreshold) {
+	if take >= float64(config.Set.Log.SlowSQLThreshold) {
 		client = SlowSQL
 	}
 	if client.IsClosed() {

@@ -27,7 +27,7 @@ var (
 
 func init() {
 
-	pflag.StringVarP(&Addr, "addr", "a", "", "listening address.")
+	pflag.StringVarP(&Addr, "addr", "a", ":7777", "listening address.")
 	pflag.StringVarP(&ConfFilePath, "config", "c", "./conf.toml", "config file path.")
 	pflag.BoolVarP(&ShowVersion, "version", "v", false, "print version information and quit.")
 	pflag.StringVarP(&AdminPath, "adminpath", "", "", fmt.Sprintf("reset administration path. (default %s)", constant.DefaultAdminPath))

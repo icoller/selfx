@@ -53,7 +53,7 @@ func (d *DetectLinks) Load(ctx *entity.Plugin) error {
 func (d *DetectLinks) Run(ctx *entity.Plugin) (err error) {
 
 	d.ctx = ctx
-	d.mySiteURL = config.Config.Site.URL
+	d.mySiteURL = config.Set.Site.URL
 	d.mySiteURL = strings.TrimPrefix(d.mySiteURL, "http://")
 	d.mySiteURL = strings.TrimPrefix(d.mySiteURL, "https://")
 	d.mySiteURL = strings.TrimPrefix(d.mySiteURL, "//")

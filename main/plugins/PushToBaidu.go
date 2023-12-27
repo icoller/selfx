@@ -71,7 +71,7 @@ func (p *PushToBaidu) push(title, uri string, logs ...zap.Field) {
 
 // PushURL 推送url
 func (p *PushToBaidu) PushURL(uri ...string) (*PushToBaiduResult, error) {
-	if config.Config.Site.URL == "" {
+	if config.Set.Site.URL == "" {
 		return nil, errors.New("site url undefined")
 	}
 	if p.ApiURL == "" {

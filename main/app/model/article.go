@@ -28,11 +28,11 @@ func (ArticleBase) TableName() string {
 }
 
 func (a *ArticleBase) FullURL() string {
-	return config.Config.Site.GetURL() + a.URL()
+	return config.Set.Site.GetURL() + a.URL()
 }
 
 func (a *ArticleBase) URL() string {
-	return strings.Replace(config.Config.Router.GetArticleRule(), ":slug", a.Slug, 1)
+	return strings.Replace(config.Set.Router.GetArticleRule(), ":slug", a.Slug, 1)
 }
 
 func (a *ArticleBase) CreateTimeFormat(layouts ...string) string {

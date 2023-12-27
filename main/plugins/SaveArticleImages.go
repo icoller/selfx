@@ -112,11 +112,11 @@ func (s *SaveArticleImages) Save(item *model.Article) error {
 // 判断图片地址是否是当前定义的上传域
 func (s *SaveArticleImages) isCurrentUploadDomain(imgURL string) bool {
 	// upload域开头直接跳过
-	if strings.HasPrefix(imgURL, config.Config.Upload.Domain) {
+	if strings.HasPrefix(imgURL, config.Set.Upload.Domain) {
 		return true
 	}
 	// 检测图片URL是否包含上传域名
-	if uri, err := url.Parse(config.Config.Upload.Domain); err == nil {
+	if uri, err := url.Parse(config.Set.Upload.Domain); err == nil {
 		if uri.Host != "" && strings.Contains(imgURL, uri.Host) {
 			return true
 		}

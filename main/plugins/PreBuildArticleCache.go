@@ -57,12 +57,12 @@ func (d *PreBuildArticleCache) ArticleUpdateAfter(item *model.Article) {
 }
 
 func (d *PreBuildArticleCache) build(item *model.Article, action string) {
-	if !config.Config.Cache.Enable {
+	if !config.Set.Cache.Enable {
 		d.ctx.Log.Warn("cache config is disabled")
 		return
 	}
 
-	option := config.Config.Cache.GetOption("article")
+	option := config.Set.Cache.GetOption("article")
 	if option == nil || !option.Enable {
 		d.ctx.Log.Warn("article cache config is disabled")
 		return

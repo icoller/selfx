@@ -2,7 +2,7 @@
  * @Author: coller
  * @Date: 2023-12-20 21:46:14
  * @LastEditors: coller
- * @LastEditTime: 2023-12-27 14:56:41
+ * @LastEditTime: 2023-12-27 17:14:04
  * @Desc:
  */
 package service
@@ -16,7 +16,7 @@ import (
 
 // AdminExists 判断管理员是否存在
 func AdminExists() bool {
-	return config.Config.Admin.Username != ""
+	return config.Set.Admin.Username != ""
 }
 
 // AdminCreate 创建管理员
@@ -24,10 +24,10 @@ func AdminCreate(username, password string) error {
 	if AdminExists() {
 		return errors.New("administrator already exists")
 	}
-	if err := config.Config.Admin.InitAdministrator(username, password); err != nil {
+	if err := config.Set.Admin.InitAdministrator(username, password); err != nil {
 		return err
 	}
-	return service.Push(config.Config.Admin)
+	return service.Push(config.Set.Admin)
 }
 
 func AdminLogin(username, password, captchaAnswer, captchaID string) (token string, err error) {
@@ -35,7 +35,7 @@ func AdminLogin(username, password, captchaAnswer, captchaID string) (token stri
 		return
 	}
 	captcha.Client.Delete(captchaID) // 验证码成功后，清除旧的验证码，防止重复使用
-	return config.Config.Admin.Login(username, password)
+	return config.Set.Admin.Login(username, password)
 }
 
 func AdminCaptcha() (bs64 string, id string) {

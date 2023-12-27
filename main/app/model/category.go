@@ -19,23 +19,23 @@ type Category struct {
 }
 
 func (c *Category) FullURL() string {
-	return config.Config.Site.GetURL() + c.URL()
+	return config.Set.Site.GetURL() + c.URL()
 }
 
 func (c *Category) URL() string {
-	return strings.Replace(config.Config.Router.GetCategoryRule(), ":slug", c.Slug, 1)
+	return strings.Replace(config.Set.Router.GetCategoryRule(), ":slug", c.Slug, 1)
 }
 
 func (c *Category) PageURL(page int) string {
 	if page < 2 {
 		return c.URL()
 	}
-	res := strings.Replace(config.Config.Router.GetCategoryPageRule(), ":slug", c.Slug, 1)
+	res := strings.Replace(config.Set.Router.GetCategoryPageRule(), ":slug", c.Slug, 1)
 	return strings.Replace(res, ":page<int>", strconv.Itoa(page), 1)
 }
 
 func (c *Category) FullPageURL(page int) string {
-	return config.Config.Site.GetURL() + c.PageURL(page)
+	return config.Set.Site.GetURL() + c.PageURL(page)
 }
 
 func (c *Category) CreateTimeFormat(layouts ...string) string {

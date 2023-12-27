@@ -2,7 +2,7 @@
  * @Author: coller
  * @Date: 2023-12-27 12:56:32
  * @LastEditors: coller
- * @LastEditTime: 2023-12-27 15:41:58
+ * @LastEditTime: 2023-12-27 17:20:43
  * @Desc: 用户
  */
 package service
@@ -23,7 +23,10 @@ import (
 	"time"
 )
 
-func UserRegisterAccount(req *dto.UserRegister) (user *model.User, err error) {
+func UserRegister(req *dto.UserRegister) (user *model.User, err error) {
+	if config.Set.System.CloseUser {
+		return user, errors.New("会员系统已关闭，无法注册")
+	}
 	if req.Mode == constant.UserModeMobile {
 		if service.User.HasMobile(req.Username) {
 			return user, errors.New("手机号已注册，请直接登录")
@@ -53,7 +56,10 @@ func UserRegisterAccount(req *dto.UserRegister) (user *model.User, err error) {
 	return user, nil
 }
 
-func UserLoginAccount(req *dto.UserLogin) (data *dto.UserLoginInfo, err error) {
+func UserLogin(req *dto.UserLogin) (data *dto.UserLoginInfo, err error) {
+	if config.Set.System.CloseUser {
+		return data, errors.New("会员系统已关闭，无法登录")
+	}
 	var user *model.User
 	if req.Mode == constant.UserModeUsername {
 		user, err = service.User.GetByUsername(req.Username)
@@ -97,7 +103,7 @@ func UserLoginAccount(req *dto.UserLogin) (data *dto.UserLoginInfo, err error) {
 	return &dto.UserLoginInfo{
 		UserAuth: dto.UserAuth{
 			XAuth:     xAuth,
-			ExpiresIn: time.Now().Add(time.Hour * config.Config.System.JwtExpiresTime).Unix(),
+			ExpiresIn: time.Now().Add(time.Hour * config.Set.System.JwtExpiresTime).Unix(),
 		},
 		UserInfo: userInfo,
 	}, nil

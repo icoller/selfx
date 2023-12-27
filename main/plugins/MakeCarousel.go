@@ -110,7 +110,7 @@ func (p *MakeCarousel) Run(ctx *pluginEntity.Plugin) (err error) {
 		return
 	}
 	// 把旧的加到后面
-	res = append(res, config.Config.Template.Carousel...)
+	res = append(res, config.Set.Template.Carousel...)
 	// 去重
 	res = p.removeRepeat(res)
 	// 限制数量
@@ -118,9 +118,9 @@ func (p *MakeCarousel) Run(ctx *pluginEntity.Plugin) (err error) {
 		res = res[0:p.Limit]
 	}
 	// 赋值新的结果
-	config.Config.Template.Carousel = res
+	config.Set.Template.Carousel = res
 	// 推送到数据库
-	if err = configService.Push(config.Config.Template); err != nil {
+	if err = configService.Push(config.Set.Template); err != nil {
 		p.ctx.Log.Error("push data error", zap.Error(err))
 		return
 	}
@@ -143,10 +143,10 @@ func (p *MakeCarousel) findImg(content string) (res string) {
 			src = "https:" + src
 		}
 		if strings.HasPrefix(src, "/") {
-			src = config.Config.Site.GetURL() + src
+			src = config.Set.Site.GetURL() + src
 		}
 		// 图片已存在
-		if p.isExist(src, config.Config.Template.Carousel) {
+		if p.isExist(src, config.Set.Template.Carousel) {
 			p.ctx.Log.Warn("image is exist", zap.String("src", src))
 			return false
 		}

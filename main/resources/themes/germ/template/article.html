@@ -2,6 +2,7 @@
 {{import "./component/article_list.html"}}
 {{import "./component/breadcrumb.html" }}
 {{block main()}}
+    <main class="col-span-full lg:col-span-11 xl:col-span-12">
     {{ tags := Tag().Limit(10).ListByArticleID(Data.ID) }}
     {{ listByCategory :=Article().Limit(10).ListByCategoryID(Data.ID,Data.CategoryID) }}
     <article class="leading-8">
@@ -23,7 +24,6 @@
         </ul>
         {{ end }}
     </article>
-
     {{ if len(tags) > 0}}
         <div class="card">
             {{listByTag := Article().Limit(15).ListByTags(tags)}}
@@ -36,7 +36,10 @@
             {{yield article_list(list=listByCategory,titleTag="h3")}}
         </div>
     {{ end }}
-
+    </main>
+    <aside class="col-span-full lg:col-span-5 xl:col-span-4">
+        {{ include "./layout/aside.html" }}
+    </aside>
     <script type="text/javascript">
         let bots = ["google","bing","baidu","yahoo","bot","spider"]
         for (let k in bots) {

@@ -131,10 +131,10 @@ func Register(route fiber.Router) {
 
 func auth() any {
 	return middleware.Auth("token", func(token string) (string, bool) {
-		if config.Config.Admin.VerifyJwtToken(token) {
+		if config.Set.Admin.VerifyJwtToken(token) {
 			return "administrator", true
 		}
-		if config.Config.API.Enable && token == config.Config.API.SecretKey {
+		if config.Set.API.Enable && token == config.Set.API.SecretKey {
 			return "api", true
 		}
 		return "", false

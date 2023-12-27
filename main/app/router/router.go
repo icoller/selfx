@@ -32,12 +32,12 @@ func New() *Router {
 }
 
 func (r *Router) newFiber() *fiber.App {
-	app := fiber.New(config.Config.Router.GetOptions())
+	app := fiber.New(config.Set.Router.GetOptions())
 
 	// pprof 性能分析
 	var pprofPrefix = ""
-	if config.Config.Router.PprofSecret != "" {
-		pprofPrefix = "/" + config.Config.Router.PprofSecret
+	if config.Set.Router.PprofSecret != "" {
+		pprofPrefix = "/" + config.Set.Router.PprofSecret
 	}
 	app.Use(pprof.New(pprof.Config{Prefix: pprofPrefix}))
 
@@ -47,11 +47,11 @@ func (r *Router) newFiber() *fiber.App {
 	// http log
 	app.Use(middleware.HttpLog)
 	// ETag
-	if config.Config.Router.ETag {
+	if config.Set.Router.ETag {
 		app.Use(etag.New())
 	}
 	// 压缩
-	app.Use(compress.New(compress.Config{Level: compress.Level(config.Config.Router.CompressLevel)}))
+	app.Use(compress.New(compress.Config{Level: compress.Level(config.Set.Router.CompressLevel)}))
 
 	// TLS
 	app.Use(middleware.TLS)
@@ -65,7 +65,7 @@ func (r *Router) newFiber() *fiber.App {
 func (r *Router) Run() error {
 	log.Info("app starting...")
 	go func() {
-		if config.Config.TLS.Enable {
+		if config.Set.TLS.Enable {
 			err := r.listenerTLS()
 			if err != nil {
 				log.Error("tls listen error", zap.Error(err))
@@ -88,10 +88,10 @@ func (r *Router) listenerTLS() error {
 }
 
 func (r *Router) ln() (ln net.Listener, err error) {
-	if config.Config.TLS.CertPEM == "" || config.Config.TLS.KeyPEM == "" {
+	if config.Set.TLS.CertPEM == "" || config.Set.TLS.KeyPEM == "" {
 		return ln, errors.New("tls Cert or KEY is undefined")
 	}
-	cert, err := tls.X509KeyPair([]byte(config.Config.TLS.CertPEM), []byte(config.Config.TLS.KeyPEM))
+	cert, err := tls.X509KeyPair([]byte(config.Set.TLS.CertPEM), []byte(config.Set.TLS.KeyPEM))
 	if err != nil {
 		return
 	}
@@ -101,11 +101,11 @@ func (r *Router) ln() (ln net.Listener, err error) {
 		Certificates:   []tls.Certificate{cert},
 		GetCertificate: tlsHandler.GetClientInfo,
 	}
-	netWork := config.Config.Router.Options.Network
+	netWork := config.Set.Router.Options.Network
 	if netWork == "" {
 		netWork = "tcp"
 	}
-	ln, err = net.Listen(netWork, config.Config.TLS.ListenAddr())
+	ln, err = net.Listen(netWork, config.Set.TLS.ListenAddr())
 	ln = tls.NewListener(ln, c)
 	r.app.SetTLSHandler(tlsHandler)
 	return

@@ -73,7 +73,7 @@ func (c *Category) PseudorandomList() (res []model.Category) {
 
 // GetWithAncestors 获取分类和其祖先
 func (c *Category) GetWithAncestors(id int) (res []model.Category) {
-	res, err := service.Category.GetWithAncestors(context.NewContextWithComment(config.Config.More.ViewAllCategoryLimit, c.order, c.comment), id)
+	res, err := service.Category.GetWithAncestors(context.NewContextWithComment(config.Set.More.ViewAllCategoryLimit, c.order, c.comment), id)
 	log.ErrorShortcut("template query error", err)
 	return
 }
@@ -88,7 +88,7 @@ func (c *Category) GetWithParent(id int) (res []model.Category) {
 
 // Descendants 获取分类所有后代
 func (c *Category) Descendants(rootID int) (res []dto.CategoryTree) {
-	res, err := service.Category.ListDescendants(context.NewContextWithComment(config.Config.More.ViewAllCategoryLimit, c.order, c.comment), rootID)
+	res, err := service.Category.ListDescendants(context.NewContextWithComment(config.Set.More.ViewAllCategoryLimit, c.order, c.comment), rootID)
 	log.ErrorShortcut("template query error", err)
 	return
 }

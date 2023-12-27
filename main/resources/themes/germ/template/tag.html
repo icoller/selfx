@@ -1,10 +1,9 @@
 {{extends "./layout/layout.html"}}
 {{import "./component/article_list.html"}}
 {{import "./component/pagination.html" }}
-
 {{block main()}}
+    <main class="col-span-full lg:col-span-11 xl:col-span-12">
     <div class="card">
-
         <h1 class="page-title mb-3">
             {{ if Page.PageNumber > 1}}
                 <a href="{{Data.URL()}}">{{Data.Name}}</a>
@@ -17,5 +16,8 @@
         {{yield article_list(list=res.List)}}
         {{yield pagination(pageTotal=res.PageTotal, existNextPage=res.ExistNextPage, disableCount=res.DisableCount, count=res.Count)}}
     </div>
-
+    </main>
+    <aside class="col-span-full lg:col-span-5 xl:col-span-4">
+        {{ include "./layout/aside.html" }}
+    </aside>
 {{end}}

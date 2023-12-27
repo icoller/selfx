@@ -29,7 +29,7 @@ func HomeCategory(ctx *fiber.Ctx) error {
 		page = 1
 	}
 	// 超出最大页数限制
-	if config.Config.Template.CategoryPageList.MaxPage > 0 && page > config.Config.Template.CategoryPageList.MaxPage {
+	if config.Set.Template.CategoryPageList.MaxPage > 0 && page > config.Set.Template.CategoryPageList.MaxPage {
 		return ctx.SendStatus(404)
 	}
 	b, err := webServ.RenderCategoryBySlug(slug, page)
@@ -50,7 +50,7 @@ func HomeTag(ctx *fiber.Ctx) error {
 		page = 1
 	}
 	// 限制最大页数
-	if config.Config.Template.TagPageList.MaxPage > 0 && page > config.Config.Template.TagPageList.MaxPage {
+	if config.Set.Template.TagPageList.MaxPage > 0 && page > config.Set.Template.TagPageList.MaxPage {
 		return ctx.SendStatus(404)
 	}
 	b, err := webServ.RenderTagBySlug(slug, page)
@@ -82,7 +82,7 @@ func HomeArticleViews(ctx *fiber.Ctx) error {
 	if !ctx.XHR() {
 		return ctx.SendStatus(200)
 	}
-	if config.Config.More.ArticleViewsPool == 0 || viewsPool.Free() == 0 {
+	if config.Set.More.ArticleViewsPool == 0 || viewsPool.Free() == 0 {
 		return ctx.SendStatus(200)
 	}
 	if err := viewsPool.Invoke(ctx.Params("slug")); err != nil {
@@ -91,7 +91,7 @@ func HomeArticleViews(ctx *fiber.Ctx) error {
 	return ctx.SendStatus(200)
 }
 
-var viewsPool, _ = ants.NewPoolWithFunc(config.Config.More.ArticleViewsPool, articleViewUpdate)
+var viewsPool, _ = ants.NewPoolWithFunc(config.Set.More.ArticleViewsPool, articleViewUpdate)
 
 func articleViewUpdate(val any) {
 	slug, ok := val.(string)

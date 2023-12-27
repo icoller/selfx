@@ -51,10 +51,10 @@ func InitTemplate() (err error) {
 }
 
 func CurrentThemePath() (string, error) {
-	if config.Config.Theme.Current == "" {
+	if config.Set.Theme.Current == "" {
 		return "", errors.New("theme is undefined")
 	}
-	return filepath.Join(constant.ThemesDir, config.Config.Theme.Current), nil
+	return filepath.Join(constant.ThemesDir, config.Set.Theme.Current), nil
 }
 
 func Render(template string, binds Binds) ([]byte, error) {

@@ -2,7 +2,7 @@
  * @Author: coller
  * @Date: 2023-12-20 21:46:14
  * @LastEditors: coller
- * @LastEditTime: 2023-12-25 15:20:54
+ * @LastEditTime: 2023-12-27 23:03:49
  * @Desc:
  */
 package repo
@@ -38,6 +38,10 @@ func MigrateTable() {
 	}
 
 	if err := Crawl.MigrateTable(); err != nil {
+		log.Error("migrate crawl table error", log.Err(err))
+	}
+
+	if err := Verify.MigrateTable(); err != nil {
 		log.Error("migrate crawl table error", log.Err(err))
 	}
 }

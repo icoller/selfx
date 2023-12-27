@@ -34,7 +34,7 @@ type CustomClaims struct {
  */
 func Create(userId uint, saltId string, hour time.Duration) (string, error) {
 	if hour == 0 {
-		hour = config.Config.System.JwtExpiresTime
+		hour = config.Set.System.JwtExpiresTime
 	}
 	claimsData := CustomClaims{
 		UserId: userId,
@@ -45,7 +45,7 @@ func Create(userId uint, saltId string, hour time.Duration) (string, error) {
 		},
 	}
 	tokenClaims := jwt.NewWithClaims(jwt.SigningMethodHS256, &claimsData)
-	token, err := tokenClaims.SignedString(conv.StringToByte(config.Config.System.JwtSigningKey))
+	token, err := tokenClaims.SignedString(conv.StringToByte(config.Set.System.JwtSigningKey))
 	if err != nil {
 		return "", err
 	}
@@ -58,7 +58,7 @@ func Create(userId uint, saltId string, hour time.Duration) (string, error) {
  */
 func Parse(tokenStr string) (*CustomClaims, error) {
 	token, err := jwt.ParseWithClaims(cryptx.AesDecrypt(strings.Replace(tokenStr, "_", "+", -1), ""), &CustomClaims{}, func(token *jwt.Token) (interface{}, error) {
-		return conv.StringToByte(config.Config.System.JwtSigningKey), nil
+		return conv.StringToByte(config.Set.System.JwtSigningKey), nil
 	})
 	if err != nil || token == nil {
 		return nil, errors.New("无法处理此令牌")

@@ -2,7 +2,7 @@
  * @Author: coller
  * @Date: 2023-12-27 10:33:00
  * @LastEditors: coller
- * @LastEditTime: 2023-12-27 10:50:24
+ * @LastEditTime: 2023-12-27 23:03:20
  * @Desc:
  */
 package repo
@@ -13,14 +13,16 @@ import (
 	"selfx/init/db"
 )
 
-func init() {}
-
 var Verify = new(VerifyRepo)
 
 type VerifyRepo struct{}
 
 func (r *VerifyRepo) MigrateTable() error {
 	return db.DB.AutoMigrate(&model.Verify{})
+}
+
+func (r *VerifyRepo) Create(item *model.Verify) error {
+	return db.DB.Create(item).Error
 }
 
 func (r *VerifyRepo) GetByCodeUsernameTypeIdStatus(username, code string, typeId uint, status uint) (varify *model.Verify, err error) {

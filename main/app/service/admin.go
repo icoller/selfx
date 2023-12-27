@@ -17,35 +17,35 @@ type AdminService struct{}
 
 // 更新管理员配置
 func (s *AdminService) Update(username, password string, loginExpire timex.Duration) error {
-	if err := config.Config.Admin.Update(username, password, loginExpire); err != nil {
+	if err := config.Set.Admin.Update(username, password, loginExpire); err != nil {
 		return err
 	}
-	config.Config.Admin.ResetJwtKey() // 重置 jwtKey 主动使所有已登录失效
-	return service.Push(config.Config.Admin)
+	config.Set.Admin.ResetJwtKey() // 重置 jwtKey 主动使所有已登录失效
+	return service.Push(config.Set.Admin)
 }
 
 // 更新管理员用户名
 func (s *AdminService) UsernameUpdate(username string) error {
-	if err := config.Config.Admin.UpdateUsername(username); err != nil {
+	if err := config.Set.Admin.UpdateUsername(username); err != nil {
 		return err
 	}
-	config.Config.Admin.ResetJwtKey()
-	return service.Push(config.Config.Admin)
+	config.Set.Admin.ResetJwtKey()
+	return service.Push(config.Set.Admin)
 }
 
 // 更新管理员密码
 func (s *AdminService) PasswordUpdate(password string) error {
-	if err := config.Config.Admin.UpdatePassword(password); err != nil {
+	if err := config.Set.Admin.UpdatePassword(password); err != nil {
 		return err
 	}
-	config.Config.Admin.ResetJwtKey()
-	return service.Push(config.Config.Admin)
+	config.Set.Admin.ResetJwtKey()
+	return service.Push(config.Set.Admin)
 }
 
 // 更新管理路径
 func (s *AdminService) PathUpdate(path string) error {
-	if err := config.Config.Router.UpdateAdminPath(path); err != nil {
+	if err := config.Set.Router.UpdateAdminPath(path); err != nil {
 		return err
 	}
-	return service.Push(config.Config.Router)
+	return service.Push(config.Set.Router)
 }

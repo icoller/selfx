@@ -2,7 +2,7 @@
  * @Author: coller
  * @Date: 2023-12-20 21:46:14
  * @LastEditors: coller
- * @LastEditTime: 2023-12-27 11:58:38
+ * @LastEditTime: 2023-12-27 17:13:45
  * @Desc: 配置
  */
 package controller
@@ -16,11 +16,11 @@ import (
 )
 
 func ConfigList(ctx *fiber.Ctx) error {
-	return ctx.JSON(mapper.ResultData(mapper.Config.ConfigListToInfoList(config.Config.Items()), nil))
+	return ctx.JSON(mapper.ResultData(mapper.Config.ConfigListToInfoList(config.Set.Items()), nil))
 }
 
 func ConfigGet(ctx *fiber.Ctx) error {
-	return ctx.JSON(mapper.ResultData(config.Config.Get(ctx.Params("id"))))
+	return ctx.JSON(mapper.ResultData(config.Set.Get(ctx.Params("id"))))
 }
 
 func ConfigUpdate(ctx *fiber.Ctx) error {
@@ -28,7 +28,7 @@ func ConfigUpdate(ctx *fiber.Ctx) error {
 	if id == "admin" { // post管理员配置需要加密密码，所以单独执行
 		return ConfigUpdateAdmin(ctx)
 	}
-	return ctx.JSON(mapper.Result(config.Config.Save(id, ctx.Body())))
+	return ctx.JSON(mapper.Result(config.Set.Save(id, ctx.Body())))
 }
 
 func ConfigUpdateAdmin(ctx *fiber.Ctx) error {

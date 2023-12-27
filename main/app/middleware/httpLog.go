@@ -36,7 +36,7 @@ func HttpLog(ctx *fiber.Ctx) error {
 }
 
 func getRequestIP(ctx *fiber.Ctx) (ip string) {
-	for _, v := range config.Config.Router.ProxyHeader {
+	for _, v := range config.Set.Router.ProxyHeader {
 		if ip = ctx.Get(v); ip != "" {
 			arr := strings.Split(ip, ",")
 			if len(arr) == 0 {

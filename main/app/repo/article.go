@@ -75,7 +75,7 @@ func (r *ArticleRepo) Update(item *model.Article) error {
 
 func (r *ArticleRepo) checkPost(tx *gorm.DB, item *model.Article) error {
 	var existID int
-	if config.Config.More.UniqueTitle {
+	if config.Set.More.UniqueTitle {
 		if err := tx.Model(&model.ArticleBase{}).Where("title = ? and id != ?", item.Title, item.ID).Limit(1).Pluck("id", &existID).Error; err != nil {
 			return err
 		}

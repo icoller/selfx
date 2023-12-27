@@ -58,7 +58,7 @@ func (r *CrawlRepo) checkPost(tx *gorm.DB, item *model.Crawl) error {
 		}
 	}
 	// 判断 title 是否存在
-	if config.Config.More.UniqueTitle {
+	if config.Set.More.UniqueTitle {
 		if err := tx.Model(&model.Crawl{}).Where("title = ? and id != ?", item.Title, item.ID).Limit(1).Pluck("id", &id).Error; err != nil {
 			return err
 		}
